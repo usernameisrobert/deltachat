@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Susie Dialogue</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="boot-screen">
+        <div class="boot-box">
+            <div class="boot-title">LOADING</div>
+            <div class="boot-bar"><div id="boot-fill"></div></div>
+            <div id="boot-pct">0 / 0</div>
+            <div id="boot-status">warming cache</div>
+        </div>
+    </div>
+    <button id="history-tab" title="Chat History">☰</button>
+    <button id="kofi-button" type="button" title="Support on Ko-fi" aria-label="Support on Ko-fi" aria-haspopup="dialog" aria-controls="kofi-popup">
+        <img src="uploads/KOFI.png" alt="">
+    </button>
+    <aside id="history-panel">
+        <div class="history-header">
+            <span class="history-title" id="history-title">Chats</span>
+            <div class="history-header-right">
+                <button id="history-all" title="View all users' chats" class="hidden">All</button>
+                <button id="history-close" title="Close">×</button>
+            </div>
+        </div>
+        <button id="history-new" class="history-new">+ New Chat</button>
+        <ul id="chat-list"></ul>
+    </aside>
+    
+    <div class="game-container">
+        <div class="chat-history" id="chat-history"></div>
+        
+        <div class="dialogue-container">
+            <div class="textbox-container">
+                <div class="textbox">
+                    <div class="portrait-container">
+                        <img id="susie-portrait" src="/susnormal.png" alt="Susie">
+                        <img id="alphys-portrait" src="/alpnormal.png" alt="Alphys" class="hidden">
+                        <img id="toriel-portrait" src="/ralnormal.png" alt="Toriel" class="hidden">
+                        <img id="lancer-portrait" src="/lancerhappy.png" alt="Lancer" class="hidden">
+                        <img id="rouxls-portrait" src="/rouxlsnormal.png" alt="Rouxls" class="hidden">
+                        <img id="noelle-portrait" src="/0_processed.png" alt="Noelle" class="hidden">
+                        <img id="berdly-portrait" src="/berdlytalk.png" alt="Berdly" class="hidden">
+                        <img id="toby-portrait" src="/tobyfox.png" alt="Toby Fox" class="hidden">
+                        <img id="spamton-portrait" src="/spamton.png" alt="Spamton" class="hidden">
+                        <img id="queen-portrait" src="/queenoh.png" alt="Queen" class="hidden">
+                        <img id="tenna-portrait" src="/Tenna.png" alt="Tenna" class="hidden">
+                        <img id="nubert-portrait" src="/nubert.png" alt="Nubert" class="hidden">
+                        <img id="ramb-portrait" src="/rambnormal.png" alt="Ramb" class="hidden">
+                        <img id="pluey-portrait" src="/plueyblushyarnball.png" alt="Pluey" class="hidden">
+                    </div>
+                    <div class="textbox-content">
+                        <div id="dialogue-text"></div>
+                    </div>
+                    <img id="pink-tail" class="pink-overlay hidden" src="/pinktailf1.png" alt="">
+                    <img id="pink-portrait" class="pink-overlay hidden" src="/pinknormal.png" alt="Pink">
+                    <img id="loading-gif" src="uploads/bug-fungus.gif" alt="Loading" class="hidden">
+                    <img id="advance-indicator" class="hidden" src="uploads/zarrow.gif" alt="Advance">
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type your message..." maxlength="400">
+            <button id="send-button" class="hidden" title="Send" aria-label="Send"><img src="uploads/Sprite-0001__7_.png" alt="Send"></button>
+            <button id="regenerate-button" class="hidden" title="Regenerate response" aria-label="Regenerate"><img src="uploads/Sprite-0002__7_.png" alt="Regenerate"></button>
+            <button id="show-history" title="Show this chat's history" class="hidden">☰</button>
+            <button id="new-chat-button" title="New Chat" class="hidden">＋</button>
+        </div>
+
+        <div class="touch-controls" aria-hidden="true">
+            <button id="btn-z" class="touch-btn" title="Advance (Z)">Z</button>
+        </div>
+    </div>
+    
+    <audio id="dialogue-sound" src="/txsus.wav" preload="auto"></audio>
+    <audio id="alphys-sound" src="/txalp.wav" preload="auto"></audio>
+    <audio id="toriel-sound" src="/txral.wav" preload="auto"></audio>
+    <audio id="lancer-sound" src="/txlancer.wav" preload="auto"></audio>
+    <audio id="rouxls-sound" src="/txkri.wav" preload="auto"></audio>
+    <audio id="noelle-sound" src="/txnoelle.wav" preload="auto"></audio>
+    <audio id="berdly-sound" src="/txberdly.wav" preload="auto"></audio>
+    <audio id="toby-sound" src="/txkri.wav" preload="auto"></audio>
+    <audio id="spamton-sound" src="/txspam.wav" preload="auto"></audio>
+    <audio id="queen-sound" src="/txqueen.wav" preload="auto"></audio>
+    <audio id="tenna-sound" src="/txtenna1.wav" preload="auto"></audio>
+    <audio id="nubert-sound" src="/txkri.wav" preload="auto"></audio>
+    <audio id="ramb-sound" src="/txkri.wav" preload="auto"></audio>
+    
+    <!-- Preload all images -->
+    <div id="preload-images" style="display: none;">
+        <img src="/susnormal.png" alt="preload">
+        <img src="/sushappy.png" alt="preload">
+        <img src="/susevil.png" alt="preload">
+        <img src="/sussmile.png" alt="preload">
+        <img src="/sussweat.png" alt="preload">
+        <img src="/susdetermined.png" alt="preload">
+        <img src="/susskeptical.png" alt="preload">
+        <img src="/suslipbite.png" alt="preload">
+        <img src="/susnomouth.png" alt="preload">
+        <img src="/suslessdetermined.png" alt="preload">
+        <img src="/suslipbitewithwhiteeye.png" alt="preload">
+        <img src="/sussweattalk.png" alt="preload">
+        <img src="/susevilnoeye.png" alt="preload">
+        <img src="/alpnormal.png" alt="preload">
+        <img src="/alpgasp.png" alt="preload">
+        <img src="/alpnervoussmile.png" alt="preload">
+        <img src="/alpfear.png" alt="preload">
+        <img src="/alpdetermined.png" alt="preload">
+        <img src="/alpreleived.png" alt="preload">
+        <img src="/alpermbuttheyarelookingaway.png" alt="preload">
+        <img src="/alpokaythisoneislikesweatsmilebutitslikemorenervousiguess.png" alt="preload">
+        <img src="/alpnervouslookdown.png" alt="preload">
+        <img src="/alpsweatsmile.png" alt="preload">
+        <img src="/alpblush.png" alt="preload">
+        <img src="/alperm.png" alt="preload">
+        <img src="/alptheonelikesweatsmilebuttheyarelookingaway.png" alt="preload">
+        <img src="/ralnormal.png" alt="preload">
+        <img src="/ralslightsmile.png" alt="preload">
+        <img src="/ralshocked.png" alt="preload">
+        <img src="/ralsmile.png" alt="preload">
+        <img src="/ralneutral.png" alt="preload">
+        <img src="/ralveryangry.png" alt="preload">
+        <img src="/raldarkglasses.png" alt="preload">
+        <img src="/ralgasphappy.png" alt="preload">
+        <img src="/raldevious.png" alt="preload">
+        <img src="/ralfearslightsmile.png" alt="preload">
+        <img src="/ralnoglasses.png" alt="preload">
+        <img src="/ralexplainsadthinglookright.png" alt="preload">
+        <img src="/ralbecomingunsad.png" alt="preload">
+        <img src="/ralyell.png" alt="preload">
+        <img src="/ralblushlookdown.png" alt="preload">
+        <img src="/ralexplainsadthing.png" alt="preload">
+        <img src="/raldetermined.png" alt="preload">
+        <img src="/ralgrumpy.png" alt="preload">
+        <img src="/ralwink.png" alt="preload">
+        <img src="/ralfear.png" alt="preload">
+        <img src="/ralfrown.png" alt="preload">
+        <img src="/ralgasp.png" alt="preload">
+        <img src="/ralfrowneyeshalfclosed.png" alt="preload">
+        <img src="/ralnormallookaway.png" alt="preload">
+        <img src="/ralverihappi.png" alt="preload">
+        <img src="/ralangry.png" alt="preload">
+        <img src="/ralhappyeyesclosed.png" alt="preload">
+        <img src="/ralblusheyesclosed.png" alt="preload">
+        <img src="/ralverysuprised.png" alt="preload">
+        <img src="/ralnormallookright.png" alt="preload">
+        <img src="/ralconfident.png" alt="preload">
+        <img src="/ralsuprised.png" alt="preload">
+        <img src="/raloh(question mark).png" alt="preload">
+        <img src="/ralblush.png" alt="preload">
+        <img src="/ralconfused.png" alt="preload">
+        <img src="/ralblushsuprised.png" alt="preload">
+        <img src="/rouxlsscared.png" alt="preload">
+        <img src="/rouxlsscaredbuthesnotlookingbehindhim.png" alt="preload">
+        <img src="/rouxlswink.png" alt="preload">
+        <img src="/rouxlsnormal.png" alt="preload">
+        <img src="/rouxlsOHGREATHEAVEANS.png" alt="preload">
+        <img src="/rouxlscalm.png" alt="preload">
+        <img src="/rouxlsmouthopen.png" alt="preload">
+        <img src="/0_processed.png" alt="preload">
+        <img src="/1_processed.png" alt="preload">
+        <img src="/2_processed.png" alt="preload">
+        <img src="/3_processed.png" alt="preload">
+        <img src="/4_processed.png" alt="preload">
+        <img src="/5_processed.png" alt="preload">
+        <img src="/6_processed.png" alt="preload">
+        <img src="/7_processed.png" alt="preload">
+        <img src="/8_processed.png" alt="preload">
+        <img src="/9_processed.png" alt="preload">
+        <img src="/10_processed.png" alt="preload">
+        <img src="/11_processed.png" alt="preload">
+        <img src="/12_processed.png" alt="preload">
+        <img src="/13_processed.png" alt="preload">
+        <img src="/14_processed.png" alt="preload">
+        <img src="/15_processed.png" alt="preload">
+        <img src="/16_processed.png" alt="preload">
+        <img src="/17_processed.png" alt="preload">
+        <img src="/18_processed.png" alt="preload">
+        <img src="/19_processed.png" alt="preload">
+        <img src="/20_processed.png" alt="preload">
+        <img src="/21_processed.png" alt="preload">
+        <img src="/22_processed.png" alt="preload">
+        <img src="/23_processed.png" alt="preload">
+        <img src="/24_processed.png" alt="preload">
+        <img src="/25_processed.png" alt="preload">
+        <img src="/26_processed.png" alt="preload">
+        <img src="/27_processed.png" alt="preload">
+        <img src="/28_processed.png" alt="preload">
+        <img src="/29_processed.png" alt="preload">
+        <img src="/30_processed.png" alt="preload">
+        <img src="/31_processed.png" alt="preload">
+        <img src="/32_processed.png" alt="preload">
+        <img src="/33_processed.png" alt="preload">
+        <img src="/34_processed.png" alt="preload">
+        <img src="/35_processed.png" alt="preload">
+        <img src="/36_processed.png" alt="preload">
+        <img src="/37_processed.png" alt="preload">
+        <img src="/38_processed.png" alt="preload">
+        <img src="/39_processed.png" alt="preload">
+        <img src="/40_processed.png" alt="preload">
+        <img src="/41_processed.png" alt="preload">
+        <img src="/42_processed.png" alt="preload">
+        <img src="/43_processed.png" alt="preload">
+        <img src="/44_processed.png" alt="preload">
+        <img src="/45_processed.png" alt="preload">
+        <img src="/46_processed.png" alt="preload">
+        <img src="/47_processed.png" alt="preload">
+        <img src="/48_processed.png" alt="preload">
+        <img src="/49_processed.png" alt="preload">
+        <img src="/50_processed.png" alt="preload">
+        <img src="/51_processed.png" alt="preload">
+        <img src="/52_processed.png" alt="preload">
+        <img src="/53_processed.png" alt="preload">
+        <img src="/54_processed.png" alt="preload">
+        <img src="/55_processed.png" alt="preload">
+        <img src="/56_processed.png" alt="preload">
+        <img src="/57_processed.png" alt="preload">
+        <img src="/58_processed.png" alt="preload">
+        <img src="/59_processed.png" alt="preload">
+        <img src="/60_processed.png" alt="preload">
+        <img src="/61_processed.png" alt="preload">
+        <img src="/62_processed.png" alt="preload">
+        <img src="/berdlytalk.png" alt="preload">
+        <img src="/berdlythink.png" alt="preload">
+        <img src="/berdlytalkthink.png" alt="preload">
+        <img src="/berdlytalkbutyouarestupid.png" alt="preload">
+        <img src="/berdlytalkworried.png" alt="preload">
+        <img src="/berdlymischivoushappy.png" alt="preload">
+        <img src="/berdlyjoyeyesclosed.png" alt="preload">
+        <img src="/berdlyheartbroken.png" alt="preload">
+        <img src="/berdlycharismamode.png" alt="preload">
+        <img src="/berdlyoh.png" alt="preload">
+        <img src="/berdlyjoy.png" alt="preload">
+        <img src="/berdlymoreheartbroken.png" alt="preload">
+        <img src="/berdlytalksuggestive.png" alt="preload">
+        <img src="/berdlydetermination.png" alt="preload">
+        <img src="/berdlymansplain.png" alt="preload">
+        <img src="/berdlybutyouarealidiotnow.png" alt="preload">
+        <img src="/berdlykiss.png" alt="preload">
+        <img src="/berdlylessdetermination.png" alt="preload">
+        <img src="/berdlynodetermination.png" alt="preload">
+        <img src="/berdlyseriouslystopremovingthedetermination.png" alt="preload">
+        <img src="/berdlyevenlessdetermination.png" alt="preload">
+        <img src="/berdlytoomuchlessdetermination.png" alt="preload">
+        <img src="/berdlysurprisednervous.png" alt="preload">
+        <img src="/berdlytalkdark.png" alt="preload">
+        <img src="/berdlythinkdark.png" alt="preload">
+        <img src="/berdlytalkthinkdark.png" alt="preload">
+        <img src="/berdlytalkbutyoustupiddark.png" alt="preload">
+        <img src="/berdlytalkworrieddark.png" alt="preload">
+        <img src="/berdlymischivoushappydark.png" alt="preload">
+        <img src="/berdlyjoyeyescloseddark.png" alt="preload">
+        <img src="/berdlyheartbrokendark.png" alt="preload">
+        <img src="/berdlycharismamodedark.png" alt="preload">
+        <img src="/berdlyohdark.png" alt="preload">
+        <img src="/berdlyjoydark.png" alt="preload">
+        <img src="/berdlymoreheartbrokendark.png" alt="preload">
+        <img src="/berdlytalksuggestivedark.png" alt="preload">
+        <img src="/berdlydeterminationdark.png" alt="preload">
+        <img src="/berdlymansplaindark.png" alt="preload">
+        <img src="/berdlybutyouarealidiotnowdark.png" alt="preload">
+        <img src="/berdlykissdark.png" alt="preload">
+        <img src="/berdlylessdeterminationdark.png" alt="preload">
+        <img src="/berdlynodeterminationdark.png" alt="preload">
+        <img src="/berdlyseriouslystopremovingthedeterminationdark.png" alt="preload">
+        <img src="/berdlyevenlessdeterminationdark.png" alt="preload">
+        <img src="/berdlytoomuchlessdeterminationdark.png" alt="preload">
+        <img src="/berdlysurprisednervousdark.png" alt="preload">
+        <img src="/spamton.png" alt="preload">
+        <img src="/queenOHGREATHEAVANSITAPPEARSIHAVEFALLENTOTHESHITSQUAD.png" alt="preload">
+        <img src="/Tenna.png" alt="preload">
+        <img src="/nubert.png" alt="preload">
+        <img src="/rambnormal.png" alt="preload">
+        <img src="/rambscared.png" alt="preload">
+        <img src="/rambthink.png" alt="preload">
+        <img src="/rambwink.png" alt="preload">
+        <img src="/rambwink2.png" alt="preload">
+        <img src="/rambdrunk.png" alt="preload">
+        <img src="/pinknormal.png" alt="preload">
+        <img src="/pinknormaltalking.png" alt="preload">
+        <img src="/pinksmile.png" alt="preload">
+        <img src="/pinksmiletalking.png" alt="preload">
+        <img src="/pinkwink.png" alt="preload">
+        <img src="/pinkwinktalking.png" alt="preload">
+        <img src="/pinkconcern.png" alt="preload">
+        <img src="/pinkconcerntalking.png" alt="preload">
+        <img src="/pinknya.png" alt="preload">
+        <img src="/pinknyatalking.png" alt="preload">
+        <img src="/pinknyawink.png" alt="preload">
+        <img src="/pinknyawinktalking.png" alt="preload">
+        <img src="/pinkangry.png" alt="preload">
+        <img src="/pinkangrytalking.png" alt="preload">
+        <img src="/pinkangryblush.png" alt="preload">
+        <img src="/pinkangryblushtalking.png" alt="preload">
+        <img src="/pinkcry.png" alt="preload">
+        <img src="/pinkcrytalking.png" alt="preload">
+        <img src="/pinkhappycry.png" alt="preload">
+        <img src="/pinkhappycrytalking.png" alt="preload">
+        <img src="/pinkeyesclosed.png" alt="preload">
+        <img src="/pinkeyesclosedtalking.png" alt="preload">
+        <img src="/pinkeyeshalfclosed.png" alt="preload">
+        <img src="/pinkeyeshalfclosedtalking.png" alt="preload">
+        <img src="/pinkgasp.png" alt="preload">
+        <img src="/pinkgasptalking.png" alt="preload">
+        <img src="/pinkgasphorror.png" alt="preload">
+        <img src="/pinkgasphorrortalking.png" alt="preload">
+        <img src="/pinkoverjoyed.png" alt="preload">
+        <img src="/pinkoverjoyedtalking.png" alt="preload">
+        <img src="/pinksad.png" alt="preload">
+        <img src="/pinksadtalking.png" alt="preload">
+        <img src="/pinksadblush.png" alt="preload">
+        <img src="/pinksadblushtalking.png" alt="preload">
+        <img src="/pinktearfulhappy.png" alt="preload">
+        <img src="/pinktearfulhappytalking.png" alt="preload">
+        <img src="/pinkexploded.png" alt="preload">
+        <img src="/pinkshock.png" alt="preload">
+        <img src="/pinkclutchhead.png" alt="preload">
+        <img src="/pinktailf1.png" alt="preload">
+        <img src="/pinktailf2.png" alt="preload">
+        <img src="/pinktailf3.png" alt="preload">
+        <img src="/pinktailf4.png" alt="preload">
+        <img src="/pinktailf5.png" alt="preload">
+        <img src="/pinktailf6.png" alt="preload">
+        <img src="/plueyblushyarnball.png" alt="preload">
+        <img src="/plueyexhausted.png" alt="preload">
+        <img src="/plueydancef1.png" alt="preload">
+        <img src="/plueydancef2.png" alt="preload">
+        <img src="/plueydancef3.png" alt="preload">
+        <img src="/plueydancef4.png" alt="preload">
+        <img src="/plueydancef5.png" alt="preload">
+        <img src="/plueydancef6.png" alt="preload">
+        <img src="/plueydancef7.png" alt="preload">
+        <img src="/plueydancef8.png" alt="preload">
+        <img src="/plueyfrowndancef1.png" alt="preload">
+        <img src="/plueyfrowndancef2.png" alt="preload">
+        <img src="/plueyfrowndancef3.png" alt="preload">
+        <img src="/plueyfrowndancef4.png" alt="preload">
+        <img src="/plueyfrowndancef5.png" alt="preload">
+        <img src="/plueyfrowndancef6.png" alt="preload">
+        <img src="/plueyfrowndancef7.png" alt="preload">
+        <img src="/plueyfrowndancef8.png" alt="preload">
+        <img src="/plueyprettyf1.png" alt="preload">
+        <img src="/plueyprettyf2.png" alt="preload">
+        <img src="/plueyprettyf3.png" alt="preload">
+        <img src="/plueyprettyf4.png" alt="preload">
+        <img src="/plueyprettyf5.png" alt="preload">
+        <img src="/plueyyarnballf1.png" alt="preload">
+        <img src="/plueyyarnballf2.png" alt="preload">
+        <img src="/plueyyarnballf3.png" alt="preload">
+        <img src="/plueyyarnballf4.png" alt="preload">
+        <img src="/plueyyarnballf5.png" alt="preload">
+    </div>
+
+    <div id="warning-overlay" class="hidden">
+        <div class="warning-box">
+            <div class="warning-title">WARNING!!</div>
+            <div class="warning-text">This is a warning for anyone trying to do NSFW stuff in DELTACHAT. I can't see your chats yet, but one day I will. So please still refrain from doing any NSFW stuff — because when I can finally see chats, that kind of thing will be met with a ban, not just a simple chat deletion. that is all.</div>
+            <button id="warning-ok">OK</button>
+        </div>
+    </div>
+
+    <section id="kofi-popup" class="hidden" role="dialog" aria-modal="true" aria-labelledby="kofi-popup-title" aria-hidden="true">
+        <div class="kofi-popup-card">
+            <div class="kofi-popup-header">
+                <h2 id="kofi-popup-title">Support ketchupdev</h2>
+                <button id="kofi-close" type="button" aria-label="Close Ko-fi popup">×</button>
+            </div>
+            <iframe id='kofiframe' src='https://ko-fi.com/ketchupdev/?hidefeed=true&widget=true&embed=true&preview=true' style='border:none;width:100%;padding:4px;background:#f9f9f9;' height='712' title='ketchupdev'></iframe>
+        </div>
+    </section>
+    
+    <script src="local-api.js"></script>
+    <script src="boot-assets.js"></script>
+    <script src="loading-screen.js"></script>
+    <script src="preloader.js"></script>
+    <script src="expressions.js"></script>
+    <script src="worldmode.js"></script>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="kofi.js"></script>
+</body>
+</html>

@@ -1,0 +1,1648 @@
+{
+  "files": [
+    {
+      "path": "styles.css",
+      "hash": "d975e9708c9c4c8b14b75bfd593850d68002b502a3bf0375e065b3dc974c06d7"
+    },
+    {
+      "path": "kofi.js",
+      "hash": "dc7ff94f1d24a25da375dab00a197d90342c12855187ce17996fef617d9421d2"
+    },
+    {
+      "path": "loading-screen.js",
+      "hash": "a4def9b9ce040e6699eb2a6b3e58d543eb442b62449f4321e88330249cfc09f0"
+    },
+    {
+      "path": "txtenna6.wav",
+      "hash": "3600b9e3f86e5bf07b5aa65cd7347ce6f485f6f9926bb106cefc3eede35ce096"
+    },
+    {
+      "path": "expressions.js",
+      "hash": "eeb6a6b89a5cd826e23ec4f0a5e75d33fa9d22ad813025aac3cb0bd422cbfb49"
+    },
+    {
+      "path": "uploads/bug-fungus.gif",
+      "hash": "8d7dac5214b83cbea302957a7cfe5d84dbcc5f0cc617cf7070dbf1f3fcbeb31e"
+    },
+    {
+      "path": "preloader.js",
+      "hash": "f33300f7939a75fbf50fd1974e7a8527f66f6de82881c06fa3c04d60282a69a7"
+    },
+    {
+      "path": "plueydancef6.png",
+      "hash": "4944e00e822d773f2637ee92657e89f7fdcbfca72fa52f8358db2c47afb36037"
+    },
+    {
+      "path": "plueyprettyf1.png",
+      "hash": "b3c33b0a3aefec07ac3e9c8ffb22eb56d28e1f8ae595d38fdfd3f42dd82b4494"
+    },
+    {
+      "path": "plueyyarnballf4.png",
+      "hash": "2a4d2b7921696a453732e7811735fa80f805ac9ab6985047ff704dd5d160bc4a"
+    },
+    {
+      "path": "plueyyarnballf2.png",
+      "hash": "ef4252b6fcba893920d6228bc4723dedd5c16c21aa688297a8fa93189620ec44"
+    },
+    {
+      "path": "plueydancef5.png",
+      "hash": "02282971c14508ba189c8e266fbe5f8dabcc53050a7a9b9ad20a30b37b65dd3d"
+    },
+    {
+      "path": "plueydancef1.png",
+      "hash": "a45128d631d754de76af80c46a9c51162c96955673d683d7bf49c474cfb4cbae"
+    },
+    {
+      "path": "plueyprettyf5.png",
+      "hash": "ea116a959a3a012fe19b8d0a1dd9577e8edfd3b418338b128d14ee8f3ec01900"
+    },
+    {
+      "path": "plueyfrowndancef5.png",
+      "hash": "d0e0c9aee34814aac0c2510fc09604518acd7ebd6f5edf41fd542a8f2abdffbe"
+    },
+    {
+      "path": "plueyprettyf3.png",
+      "hash": "d0ae40a61fb05ee21ae357cd03f3033ebc31d06c39e7cf134fdf07b147368dcd"
+    },
+    {
+      "path": "plueydancef8.png",
+      "hash": "d7fc1ff26421df90e89da8b67fbe669a1d251df8a660112d264286ade557d159"
+    },
+    {
+      "path": "plueyyarnballf5.png",
+      "hash": "e982ebae92c2911cf4e29992aa447486e009d8a30f9c4463c62342304fa6c16f"
+    },
+    {
+      "path": "plueyfrowndancef4.png",
+      "hash": "f4489e8d7c774a954007c3f3ba678fca7b8ce906fd615a96c17a384be85f5aa2"
+    },
+    {
+      "path": "thrashmachine.ogg",
+      "hash": "7721c2d07657ac74cc8cdb714b9d936c405607e1b30e15fa33140ea48cd500ff"
+    },
+    {
+      "path": "plueyexhausted.png",
+      "hash": "8b87ebc0e0247dfccf0db2785f0a371735accda118b8dea4b27edf0d37c02616"
+    },
+    {
+      "path": "plueyfrowndancef7.png",
+      "hash": "28ba5df92c613eff32960b620127f0a3bac209582d2aef8a502acd5d4fadd13d"
+    },
+    {
+      "path": "uploads/KOFI.png",
+      "hash": "23012618d27449df74aa22ae809eaea9af5dad3751c28d1c8915c9eef7114740"
+    },
+    {
+      "path": "plueydancef2.png",
+      "hash": "5a09994df9070e04b9f59d3f834fabb6ba7bf451912b333bbee20525b794c3c1"
+    },
+    {
+      "path": "plueyprettyf4.png",
+      "hash": "adf95bf349d16b688d64a3f492d3d4895714e0a24f9d5d1468cee9295305a96d"
+    },
+    {
+      "path": "plueydancef4.png",
+      "hash": "eadcecb26e3bd04812977ea6ce938b2b228a888cddc6d210da0003d03124c9b5"
+    },
+    {
+      "path": "mus_race.ogg",
+      "hash": "e3e2fac9f7a92b5f5f127706dff2469cd7d9a72c42dd97dc548baa30b94427f6"
+    },
+    {
+      "path": "plueyprettyf2.png",
+      "hash": "8fdf6efea9abbf965150fca0c421d82ad708fa1213296ffb740334ba7230fa05"
+    },
+    {
+      "path": "boot-assets.js",
+      "hash": "b030296e37c14ae8b86f9252dbc57155b28508a89630af0f300e43ef53c70f3e"
+    },
+    {
+      "path": "txtenna5.wav",
+      "hash": "c89dce5f6356fa89453f5d7f897dc13c93395925ac9f7b039197a2f8caffdc3c"
+    },
+    {
+      "path": "plueyfrowndancef6.png",
+      "hash": "3795e20b8cd132d206defa42c02ec55f66301789d786ca0f619d3e527e6da40a"
+    },
+    {
+      "path": "pinkcry.png",
+      "hash": "f6e2b7a7fc649c956ad339577e70fb42626dfbc123f7bd7159b06445c40f8043"
+    },
+    {
+      "path": "plueyfrowndancef3.png",
+      "hash": "b1f5e0a4656cc463f976995cffdfbfa8577cfcb455689ba58a2a1d7c7b3fe540"
+    },
+    {
+      "path": "txspam2.wav",
+      "hash": "1453eab1937fbc7f5663921ded9c7105693f909875f4cfcb304e36079008b601"
+    },
+    {
+      "path": "plueydancef7.png",
+      "hash": "07203ed20f01af1461de7e0e6b8924667ff5a071f3816271a03d08615ae76483"
+    },
+    {
+      "path": "plueydancef3.png",
+      "hash": "537490a82ab2222a4532bfbc9735555c4cc0369a86c964654330878a9755f71c"
+    },
+    {
+      "path": "pinktailf2.png",
+      "hash": "880f467f625f08ece41154be3590e08fe09a6a5d9fcb39e56c044341909aed9d"
+    },
+    {
+      "path": "pinkhappycry.png",
+      "hash": "a9b00696928b7efeadc4898ea2102ad0266e9ef175605079b3f62a94f14b00d0"
+    },
+    {
+      "path": "plueyyarnballf3.png",
+      "hash": "766259e490a1988f4eda1c9f8288fa87dbb1e1eab20ebf40d1c65fce7ecff9ca"
+    },
+    {
+      "path": "plueyyarnballf1.png",
+      "hash": "368940a4a97294bb617b1d65270416afe229c0d3110550e71443be146256a3bf"
+    },
+    {
+      "path": "plueyfrowndancef8.png",
+      "hash": "cf0277f504d31bee6fdd095d9e5594ba13e7935c538eff2d62c93e74ebb89591"
+    },
+    {
+      "path": "plueyfrowndancef2.png",
+      "hash": "c1d0167879259a39a5c30e37058278e05525e2604830982cb74a6efe3296f33f"
+    },
+    {
+      "path": "shop1.ogg",
+      "hash": "a876ebfe1444b666c269ea27edbb04229294eabb8c832460de0f8cfe9dae20fc"
+    },
+    {
+      "path": "pinkwink.png",
+      "hash": "90dab2a9021ffb712852101d2173c93bc692240d34c95f22963c6fe575182614"
+    },
+    {
+      "path": "pinknya.png",
+      "hash": "6c0154d68c3d5a1319ac2bf88d665c845b25cc95ca759963611e621d84d661a5"
+    },
+    {
+      "path": "pinktailf4.png",
+      "hash": "fa77701dcc39ae56c245ca86187eab70454791f450c45c39dbeb78139ba2f8b9"
+    },
+    {
+      "path": "pinkexploded.png",
+      "hash": "6d70e93ad6f67ad3085d0e6092dfb76fdba5ffd5b0c683f93e6251c605dfce90"
+    },
+    {
+      "path": "dogcheck.ogg",
+      "hash": "0c74a92577a1828e4bfaea7578e0b3d5275b5c026d08d8031b446d00aeff0861"
+    },
+    {
+      "path": "plueyblushyarnball.png",
+      "hash": "663efd695f2c9b74d5f71eed5b7180761f8cedd898353f342f6197f0c48367d3"
+    },
+    {
+      "path": "pinkclutchhead.png",
+      "hash": "caad1412825a6b86804b8d9917dbc17321b2b7c54230892f8d494ead1e777b21"
+    },
+    {
+      "path": "pinktearfulhappytalking.png",
+      "hash": "bf822f30a5ea0a2588466aad1c228e64ed89e0c44454c887910b07b5544f71ab"
+    },
+    {
+      "path": "plueyfrowndancef1.png",
+      "hash": "35cdd33335f448006b590dbc8b8a0f27de63bac98e73dc046b76ecc5edf27e33"
+    },
+    {
+      "path": "pinktailf5.png",
+      "hash": "147f5b47f56be4643fb59ca5acd4a0c7dcc1d9459b2b624dc442580995052780"
+    },
+    {
+      "path": "pinkgasphorror.png",
+      "hash": "a80230c9be6b04483bf7f142dd92e6d0ead8e724b53d6b06c8d54d1bc043b755"
+    },
+    {
+      "path": "pinksadblushtalking.png",
+      "hash": "b9b4a202d784f5a5863dc9bc5fc8ea0605824c9cda4bd36cc3459048dd2ca3c2"
+    },
+    {
+      "path": "pinknyatalking.png",
+      "hash": "847e93188f68e8ee9197f5dadfcceba0c4cd0d162a98ca68f0da244d6f721b90"
+    },
+    {
+      "path": "txtenna2.wav",
+      "hash": "0a26f4b1ce63e6da240251a7648e8de15d7836b2a46eade6d701c49dfeed7a6c"
+    },
+    {
+      "path": "pinkeyeshalfclosed.png",
+      "hash": "5a205765fc6e22a0dbc55e03383071864bcbd561d7f888e2f438024efc5ba318"
+    },
+    {
+      "path": "pinktailf6.png",
+      "hash": "5b865fe7e70ed5bd035f63938c722c93edcf207889053c46e5c0458f462d2dd8"
+    },
+    {
+      "path": "knight.ogg",
+      "hash": "e34eca856216e6b257bc253309fd51ccb969b0668b8a31d61a35c68cfd3fd554"
+    },
+    {
+      "path": "uploads/zarrow.gif",
+      "hash": "beae50a670d12e18305cbbf4d39fe7ad7c86eea69bcbd3c227813ac77bfc3a50"
+    },
+    {
+      "path": "txkri.wav",
+      "hash": "dd871b0b2c2336c831d4327cdd669d2a2358c3af51fc2b6c044df7bab68ae49e"
+    },
+    {
+      "path": "pinkeyesclosedtalking.png",
+      "hash": "f2e37985a55a15799e7d2305a0a4ce920207e3bffdd4828c7146b41c0b8f8987"
+    },
+    {
+      "path": "pinknormal.png",
+      "hash": "ac4c6b10388b806bcb958128b02407beb3a4aa8a950821933b21c2687c586b56"
+    },
+    {
+      "path": "pinkeyeshalfclosedtalking.png",
+      "hash": "9629affa004f9903c6423f54b9e1cdc82a0f3e86ae11559e6055ad765ba23899"
+    },
+    {
+      "path": "pinkwinktalking.png",
+      "hash": "877872b9ecb209b4db77869abd8a3b4ec80b4533ffca2391d1dbb8e8dc97a9b0"
+    },
+    {
+      "path": "txalp.wav",
+      "hash": "6f92995bb3d0ca72bf140eb58235c7288bc063c3e4ce646f4c6085c210cef4f2"
+    },
+    {
+      "path": "ku4d.png",
+      "hash": "bc6e10a22ed6d7b7dcb0c5d2e9ba2fda949766cd650c54f0998fa6fbdf2f9f1d"
+    },
+    {
+      "path": "pinkoverjoyed.png",
+      "hash": "f8420f29ad5e802608e9f6dfc47192e062efe2d975b92f7002d959d537b5ae48"
+    },
+    {
+      "path": "alptheonelikesweatsmilebuttheyarelookingaway.png",
+      "hash": "ee6d64c6ba0d900ca66622146f95d56571c477b8f9c188565faa3e67954fa485"
+    },
+    {
+      "path": "pinknyawinktalking.png",
+      "hash": "0eed57bc01ae02fc173ed3211a50e732ba83067a746d9a015d33a630b12c0ffd"
+    },
+    {
+      "path": "pinksmiletalking.png",
+      "hash": "ab76090d91094cd6b8cc3f7ad6d2f02cec47425b48f0ca5026d0dabbf912c350"
+    },
+    {
+      "path": "pinksadblush.png",
+      "hash": "9bdf1522d407331301d967d7d3ced0e1b7371c6f33e43e9d12ae271666a899e6"
+    },
+    {
+      "path": "pinkeyesclosed.png",
+      "hash": "202abba4153a71e0868665ceae5d015395f691e72b49565aba570df551c635df"
+    },
+    {
+      "path": "kr2d.png",
+      "hash": "d2ab4a52ada433857c5bb8ef6a11e2d50a2f17d16cdf621b214d2d7982b40c57"
+    },
+    {
+      "path": "pinkgasphorrortalking.png",
+      "hash": "2387a69bfbc62dc3729651e7a4d957a96f56b146d57874e20aa4a30a460945fb"
+    },
+    {
+      "path": "pinksadtalking.png",
+      "hash": "e2309f428a4111226349d1b43f4692d72bd70166695bd9b2596c8341862b58c8"
+    },
+    {
+      "path": "pinkangryblush.png",
+      "hash": "5e921e802a2717945338c7741f29bc77320f7b4502fe7efdd80f9b495460c615"
+    },
+    {
+      "path": "pinktailf3.png",
+      "hash": "c37f2815ddc1c1de6c52fff5c2a2fe4725422b8b105601a8d84d2e930ba11b18"
+    },
+    {
+      "path": "pinktearfulhappy.png",
+      "hash": "f0e0c68afadba04dd25935a08edada713207cce3cbb6389e945083962f2c348a"
+    },
+    {
+      "path": "ku2d.png",
+      "hash": "90a9fcace0f10f8224029a622e722b9de7cb8c39204601e719e8be19a61f86a9"
+    },
+    {
+      "path": "pinksmile.png",
+      "hash": "031d7d62e14298b7cb7baa0da8424a1df3206dfc8e21a78f43bd59f13254f04a"
+    },
+    {
+      "path": "pinkoverjoyedtalking.png",
+      "hash": "aa8507163b1efc2fb51affbadc7eaa5dcd1c8eb936ef1e000e29e6526d192457"
+    },
+    {
+      "path": "napsta_alarm.ogg",
+      "hash": "8704f23e4c61e7738108e821dbe1756eb3160337b261a068baf2cd292ce4da7c"
+    },
+    {
+      "path": "pinksad.png",
+      "hash": "d773c515207e11dba73812651e6ab4d877443392d91382d01f4ee400d51b1811"
+    },
+    {
+      "path": "pinkangryblushtalking.png",
+      "hash": "7abd85c50de1e9ad88a7288962f2e9e3898c9afbdb167a4e9195f7c2f3600600"
+    },
+    {
+      "path": "pinkhappycrytalking.png",
+      "hash": "220231c7b5d48fe3bdbd454538571fa10c17d09c88bccfd2f2602fe8cac82bf8"
+    },
+    {
+      "path": "pinkcrytalking.png",
+      "hash": "ff7de7c627baaf654ea537c83ac897a37bd8adceb123471266bd933d19b42c9f"
+    },
+    {
+      "path": "pinknormaltalking.png",
+      "hash": "f81ade81b6b2322dec8ac0b43aaf48ef11bd5c8f9161c0e6e7d8a348570cbb50"
+    },
+    {
+      "path": "noelle_house_wip.ogg",
+      "hash": "e4f6d37414bed437ea19906111b17e5a2b7ee042c3886f363c49c9e21c7277f5"
+    },
+    {
+      "path": "1_processed.png",
+      "hash": "37514a1de9248f9c2301844fd8b5e969accc4db23f6dca27283d1bea238963db"
+    },
+    {
+      "path": "berdlyheartbrokendark.png",
+      "hash": "606dfd3893d2acd99819dfd585f9eea170298a34269be4308fa67ccb900045dc"
+    },
+    {
+      "path": "txtenna1.wav",
+      "hash": "921c5d4fc40278ba3d0e0ad8e7a61caaca9c42f1a2d1188b03d0d244692d7e6c"
+    },
+    {
+      "path": "60_processed.png",
+      "hash": "ed6cf7d55da47cae6f2d7d10bb0837341b4da877437d6b23c28761e25dba4dff"
+    },
+    {
+      "path": "ralverysuprised.png",
+      "hash": "b300cb52a607a558faf9e505e9c168f79470513f3fd3a2e8f938f2cb75407fb8"
+    },
+    {
+      "path": "uploads/Sprite-0002__7_.png",
+      "hash": "e86aabcb5f8f50b2f3d859978d21b5951bcd3d1415e2e02d33700b6ec363d572"
+    },
+    {
+      "path": "jitterbug.ogg",
+      "hash": "1564b5f833a05fc7f837bdd342a5fad1c43abb30bf10da1e3d8ae758c88a788c"
+    },
+    {
+      "path": "berdlymoreheartbrokendark.png",
+      "hash": "877ea494fff21b75aa0dde7dd5c5e7a1f9b860e74d8d9a0b4b4b5cb4fcf32e26"
+    },
+    {
+      "path": "15_processed.png",
+      "hash": "208944ac85fecd0a966db048c3b71037f706a42bcb2d7861e9a27c09159e264f"
+    },
+    {
+      "path": "berdlytoomuchlessdeterminationdark.png",
+      "hash": "5d321addd11283855563964b45e545cac1efccb64840faceb81adf784fa36bc1"
+    },
+    {
+      "path": "pinknyawink.png",
+      "hash": "d0194b2152f045b3f83c24118335a6424ed1af5ea61ec5d7e055b4e82d88d1df"
+    },
+    {
+      "path": "berdlyevenlessdetermination.png",
+      "hash": "0053601399cf0813ed46c55c3fec951414157ddabbaa89e816c744b3ec6ff491"
+    },
+    {
+      "path": "school-hitbox.png",
+      "hash": "df4886fecde65b2c2f32e8661ac4bbe863ab50126f061cd9a1137e3c2b7d257b"
+    },
+    {
+      "path": "rambscared.png",
+      "hash": "615e95854285d81c446fbc0660788b8a7caa620735585cbe63f91532b2058080"
+    },
+    {
+      "path": "berdlythinkdark.png",
+      "hash": "41e6cb8a9b170785e8f9dc8a53622a96ab799b0949b3ce1b4c6959d139cceeb8"
+    },
+    {
+      "path": "wind.ogg",
+      "hash": "983f0218e3d7876426cdd788821c7ea9d78860bb0fe8424faa3a942530482599"
+    },
+    {
+      "path": "uploads/Sprite-0001__7_.png",
+      "hash": "cffb72dbd5ea8bfb92cd8b80ee710b5c2cdc26f5b86eea5341cad5d621604027"
+    },
+    {
+      "path": "42_processed.png",
+      "hash": "fe1dde5a8aa9299e88f0ba310f61b442157c5d9097aa63787fe9ebc78388da2b"
+    },
+    {
+      "path": "txtenna9.wav",
+      "hash": "0a898f2f3d91fe67ec215e58ee4825d7fc8ec09903cf05be18164971b218d2d1"
+    },
+    {
+      "path": "berdlytalkbutyoustupiddark.png",
+      "hash": "1ebb4f5caa4552416ea4a740b289dc4e577d97e94052565f7b46533ae59f0e82"
+    },
+    {
+      "path": "tobyfox.png",
+      "hash": "ffc1a74aa60754c3648add1848633050c7d195521f6ab034ca70983e9d0aeecb"
+    },
+    {
+      "path": "22_processed.png",
+      "hash": "11e0eedf5ab9ab22bc9684d5567dace1475015fa62c30440fb14c593ea07072b"
+    },
+    {
+      "path": "lancerhappy.png",
+      "hash": "963b7e480b9cc5107f1a58f451ede26f2cebe986a9df6996c53d9aea9bcaf0a3"
+    },
+    {
+      "path": "kl1d.png",
+      "hash": "e897a099c0f1a1d5519a77414230135517f2e2f64fcda6831fd542f01ef5e179"
+    },
+    {
+      "path": "ch3_tvtime.ogg",
+      "hash": "d46a6c8bd598870573d4659bc0ddcafbe039f899dbf3c444bdb23023913c9bbd"
+    },
+    {
+      "path": "spamton_meeting.ogg",
+      "hash": "4ebebabfc44758de25535eb3281696dc6eb292db770e1569f8c4a81c01dd0ab7"
+    },
+    {
+      "path": "tense.ogg",
+      "hash": "3a9fc75742daa6e71d8949964f36802691cc8802916488c012f4e80bc9b86107"
+    },
+    {
+      "path": "berdly_theme.ogg",
+      "hash": "37607654b59ae56bce25eb242daf281dfffb82f2db5def3ffb494007513b990a"
+    },
+    {
+      "path": "cybercity.ogg",
+      "hash": "8977006c6e41ae17ae7c482f919b1bf177cc6cc7fe11570e8e8fe5accc8570b3"
+    },
+    {
+      "path": "field_of_hopes.ogg",
+      "hash": "5ac53e8aeb510f2df3117fdbfc38ae56dfb810f2ee40ae502ca285b2d7858d3b"
+    },
+    {
+      "path": "berdlylessdeterminationdark.png",
+      "hash": "a3c4dde0fcdf96df7ef9ae63105e2166b033d813aa77b2367ce8aeb270cff4db"
+    },
+    {
+      "path": "23_processed.png",
+      "hash": "a7c40ca88a66101ff37e6ce90ac4002240daee00bc2ddb8d734a7d8248d832bd"
+    },
+    {
+      "path": "ralyell.png",
+      "hash": "fb855806413c2b54af297855e4fa58dbc24ff12bc1e4f9734f975ae137c64241"
+    },
+    {
+      "path": "txqueen.wav",
+      "hash": "5b22bcfc248115d409f18c20042600290b7c98ec6407eac1e2c5c0bfe9e3d837"
+    },
+    {
+      "path": "berdlysurprisednervousdark.png",
+      "hash": "4e48b8a036218624d1ed912e4341fed3812c7dfe07b70dfd1e4edc7ab2ae90f1"
+    },
+    {
+      "path": "berdlykissdark.png",
+      "hash": "b8ddd81824f665d4322cff59d9af6c8c5f8d43d63222033bbf8bcc9ef85e9ec2"
+    },
+    {
+      "path": "berdlykissfingersdark.png",
+      "hash": "136fefe1557b650e1fb72b87d059fa09f1b04368008a660049f5ef40a6775734"
+    },
+    {
+      "path": "berdlyseriouslystopremovingthedetermination.png",
+      "hash": "9dfef690d8662e4f3c79796dc2a138ed68beb0eb48984684c2ac85ca87b5dfba"
+    },
+    {
+      "path": "berdlylessdetermination.png",
+      "hash": "5e25114e3b9622b5f2f0c0804aecff5b7e684ca35eb17cd3aefcb7aee90a4e29"
+    },
+    {
+      "path": "berdlymischivoushappydark.png",
+      "hash": "7909ddad2e2c8ea1ef72c4f3e59ea2aa8acd86b33495ca8273d87b5faf87be7d"
+    },
+    {
+      "path": "alpdetermined.png",
+      "hash": "456c9ea75fabe23df3cc9af483974be56f7d619808e101f7c53a3a3adf044021"
+    },
+    {
+      "path": "ralblushlookdown.png",
+      "hash": "50f649819faf9c6de31e2c5108d2a83f6bfbc704baf7e8c2f8b5340ecda55c79"
+    },
+    {
+      "path": "berdlynodetermination.png",
+      "hash": "74a1a51b0dd115bdeca29bc269e34094635d6b5ce55edd6d17b856ed7ae573ae"
+    },
+    {
+      "path": "berdlyjoyeyescloseddark.png",
+      "hash": "9ecf835620fdc1a9552c9272bbc5a1852f4af28a13b9e0a2e43f9138d860f94d"
+    },
+    {
+      "path": "cyber_battle.ogg",
+      "hash": "2c4d2e73370a0559b11f4181e44c2914be4a075a70ec6996c8181fcc408f4219"
+    },
+    {
+      "path": "21_processed.png",
+      "hash": "ff3c1663b1294f40172c69f1726da713eb7e4ee21465eab5cdd1d13fe6dba79d"
+    },
+    {
+      "path": "worldmode.js",
+      "hash": "ef26ead34787c3b646bad494cd817ddbb39b8079f4f68a8c3cfc4b4eb34926c0"
+    },
+    {
+      "path": "rambnormal.png",
+      "hash": "9585d12de43804290af78d96d64c1e366308cc39bb47e8ae18d4ebbebd9ce063"
+    },
+    {
+      "path": "lancerverysad.png",
+      "hash": "216294d7e0a9192a8c7b5f156a4917d808c9ee59cdf30005213e6d5424811ecd"
+    },
+    {
+      "path": "berdlytalkworried.png",
+      "hash": "9380ec7177252ec76ff19869e9d2f84df552fa8282e008c685cf9ce06c334591"
+    },
+    {
+      "path": "berdlycharismamodedark.png",
+      "hash": "bc1cbc61891e47e1f3246fddbc2e8ed7daf8498f90b07cc9db9435f335d5c962"
+    },
+    {
+      "path": "berdlydeterminationdark.png",
+      "hash": "9917c47d9b2fba5138f7d9fe7e6ffd0ef8c8404d58fd0e12a14995ed74af3fea"
+    },
+    {
+      "path": "berdlyseriouslystopremovingthedeterminationdark.png",
+      "hash": "0e372324cad96362549f7b8f5744502df8127d76c0ca526560a7fdff46edc505"
+    },
+    {
+      "path": "lancerfancy.png",
+      "hash": "7aa0a309f0b386c3ad3571f3aa89ca62ca5011e5ec647e8df4b2c1dd99e34d47"
+    },
+    {
+      "path": "kr1d.png",
+      "hash": "013a19773fee669a0d4ffb05d964da5dc8a18640283f33cf85505ee0bf69be67"
+    },
+    {
+      "path": "findher.ogg",
+      "hash": "c0f55add29c085615ac309a1ac4ba224cbf5c4d3e74b0b25cc6276d083b0a5d1"
+    },
+    {
+      "path": "susie_diner.ogg",
+      "hash": "a1a3957a89d1f87e968f7eced798df029968f187e25798b99f5bbf2890f7d14d"
+    },
+    {
+      "path": "church_hymn.ogg",
+      "hash": "7e81f8d496d3d2531720fdaf360d136601c43b08b7a996b7bb6c1c3042b5ed1c"
+    },
+    {
+      "path": "noelle_school.ogg",
+      "hash": "a806c14cfbfc1e5847f904e5186bb1942752461a1d09258063f673fb8104f62d"
+    },
+    {
+      "path": "forest.ogg",
+      "hash": "1b23b35edc20c563422e124214f468ca54973ef04c35e3da00382f6382906186"
+    },
+    {
+      "path": "ralnormallookaway.png",
+      "hash": "a8773b5e55e4555d2d21e34f314149c9ca46a9059f4119d1049b35e7c5f17bc9"
+    },
+    {
+      "path": "raldetermined.png",
+      "hash": "2bca14b57af42adb964665763c9b7f592debc7c660629e2a13ef2c7928e05ee9"
+    },
+    {
+      "path": "sussweat.png",
+      "hash": "b7ca5d17b9388d9b452e25b84c6535bbb86c8acb85747932b91ea6b2eeb3d916"
+    },
+    {
+      "path": "lancertounge.png",
+      "hash": "74605ce8ee165807cb469c4ba8ad89922dc42019daa09218f70034da319a88f5"
+    },
+    {
+      "path": "berdlyjoy.png",
+      "hash": "0b43ff55d3ed22c13a3f28bfc2a1f3b80f59affdfd7ef5179bb3f9956c3da04f"
+    },
+    {
+      "path": "berdlytalkbutyouarestupid.png",
+      "hash": "b948cd993fc7671dc2397b7511704e6c327c98206e1fa9c325f036b17fa2da2d"
+    },
+    {
+      "path": "suslipbitewithwhiteeye.png",
+      "hash": "a9d876001fc82ecaa9a62957b5f80acf64fade136dd988bfc8e9ff85982a081b"
+    },
+    {
+      "path": "susnormal.png",
+      "hash": "7bc93210146a4af36889e51d267b6dc722f5b33a9fce464ede686af24485e374"
+    },
+    {
+      "path": "sl2d.png",
+      "hash": "7dd10e14bf633634f59d7dad1b4ae1ce3f7d59edbef1b883be606374c0ad61e9"
+    },
+    {
+      "path": "alpnormal.png",
+      "hash": "43851c6863c06ae5c2bfba3bbdd5f12c2524f37462781e9d0b75db8cd5e36347"
+    },
+    {
+      "path": "alpokaythisoneislikesweatsmilebutitslikemorenervousiguess.png",
+      "hash": "d031ca0da34191e120714e80e164324fd87ce086c9dc22e506eb2fd88f672e45"
+    },
+    {
+      "path": "34_processed.png",
+      "hash": "40d020761370391f146f8c6ca3edb54830da8faad733358b76c68f8de3e8140b"
+    },
+    {
+      "path": "35_processed.png",
+      "hash": "ed7b72ae2e3eb2aee82c04b22404b313441656ca68cf73b91bb11ba06ce8c377"
+    },
+    {
+      "path": "berdlykissfingers",
+      "hash": "c3531f35621b1905d8619cfd11a63f4d9de04947ba0a9bc56ad6be300bf7df8f"
+    },
+    {
+      "path": "berdlytalkthink.png",
+      "hash": "166bc4ce7f92be4f36ce948457b4d3949bc9de14c68fd73733c6b5d31977b5bb"
+    },
+    {
+      "path": "susskeptical.png",
+      "hash": "0f547a529404dcc1da5bffd07079c1975a4a6ed3178ac32cebe229ff516f046f"
+    },
+    {
+      "path": "20_processed.png",
+      "hash": "81dd272ca8ffc11143f1220b3d4fc8d806c938fa9405c1c6a5e6b016c9c71eea"
+    },
+    {
+      "path": "alpnervoussmile.png",
+      "hash": "4075b3f328133a705388dd688c4ae9c4f948afcad73a8b9a758986d45efad4ad"
+    },
+    {
+      "path": "alpfear.png",
+      "hash": "831f89c154a5008e1f18999883374eb48b6ace80ba7c126d6cea48e8dfdfa501"
+    },
+    {
+      "path": "44_processed.png",
+      "hash": "55d69f624409fdb42ae7b6883a3c4e35f641fe9a7c0e89ffcc6bf3b39142de91"
+    },
+    {
+      "path": "alpsweatsmile.png",
+      "hash": "d43950e81b33088191c676f2b4caf950e4163f65db919b4ff7b304ed17380103"
+    },
+    {
+      "path": "susevil.png",
+      "hash": "f6aa6499d3d2ac9a3751c15b0b2e52cce3941d1ee87691df1743e521e065b016"
+    },
+    {
+      "path": "ralfear.png",
+      "hash": "6867bade9de5c5451a78a41f23cdff9b0821814fe9ad068685f5bc505f9e03e0"
+    },
+    {
+      "path": "ralwink.png",
+      "hash": "6a334a3dd0f9e07525100af41dcc07b89184c44163ad447808172eb35bfe68d4"
+    },
+    {
+      "path": "alpnervouslookdown.png",
+      "hash": "f9f51555e3f57b7560004f83690916fa187224959051d9f1bb725b8859f3f9e6"
+    },
+    {
+      "path": "ralexplainsadthing.png",
+      "hash": "ac855e83242d7d823161fbb502cc1b6aff01f46234b8d745e2a4d768e39e639a"
+    },
+    {
+      "path": "sussweattalk.png",
+      "hash": "9d10dd7903a7ff6b677834f4975afa8ccff744a32ac6fd2331e2881a11c93a1d"
+    },
+    {
+      "path": "suslipbite.png",
+      "hash": "f0a2f52e21bfcf0204a8914cb430374a591159a0b3ff66848503e7537f9b758b"
+    },
+    {
+      "path": "ralverihappi.png",
+      "hash": "f5f0592328b24a7908674037c165d412a25aa4591fee091835aed439aefdc337"
+    },
+    {
+      "path": "mike.ogg",
+      "hash": "7de21c98c7f399dce16e961041a871e5eb124fa188591d96e6c916cdf1553d3b"
+    },
+    {
+      "path": "40_processed.png",
+      "hash": "d88a2dd4ab970ec6636e2fd5fecaf6340cceb3d47f4c526c8aa54cc2205411e6"
+    },
+    {
+      "path": "6_processed.png",
+      "hash": "ddb8b34c2f5fea3af5368eab8793a4e306aac45c09510b891a0d57f513d932c2"
+    },
+    {
+      "path": "sd4d.png",
+      "hash": "616d8ba3b7326d6d5a7ce0809ab19686a7932616c8bce2df4836d19e43678490"
+    },
+    {
+      "path": "alperm.png",
+      "hash": "df6ce8eb91b9c3e4c7ef4690c2085915ad82ffbbbe61d467ee020bf30df731fc"
+    },
+    {
+      "path": "12_processed.png",
+      "hash": "d3bfec64080e352507c74e2e328305d98be7be84ced2ac693b2d7fd0b7931495"
+    },
+    {
+      "path": "berdlytalksuggestive.png",
+      "hash": "fc6735251022afd7a7b70dac58f227386a08a063449f54eed564efd5184339dd"
+    },
+    {
+      "path": "14_processed.png",
+      "hash": "844a3a71ea2574a6a1243ecb28701f9ffeb1ef6893c485a63cf78f96a3b6d3a3"
+    },
+    {
+      "path": "txsus.wav",
+      "hash": "bec43c4daca177164313d6d31a1d49abee1ef6996bd376a3ac8e2a26275f4a58"
+    },
+    {
+      "path": "32_processed.png",
+      "hash": "4c2d3c60da3176295fff0da6c021e6dbad97f42f7af165df8b436409ce0cdbef"
+    },
+    {
+      "path": "txtenna7.wav",
+      "hash": "986f01848d76a4882b84c0a209966cc3f59515ebf5d21b3c317e5150ece52d2c"
+    },
+    {
+      "path": "berdlybutyouarealidiotnow.png",
+      "hash": "664df0b989400f5b54b1c9ae0fe73a347169f8f044d060fe933bb1d725faaba8"
+    },
+    {
+      "path": "rambthink.png",
+      "hash": "5c5ef30ad2165150cd1c68233a980f3372585ecddcb34f9014629d811852b1b6"
+    },
+    {
+      "path": "3_processed.png",
+      "hash": "db60d7d4f3953091a6a8b86bcd0e696017ce410da4d1d3d1a71f01f987c9cad1"
+    },
+    {
+      "path": "37_processed.png",
+      "hash": "b38985d78824f4bcd1965c05171910004736007fcc35f55d6b896a99271606ff"
+    },
+    {
+      "path": "2_processed.png",
+      "hash": "c0e5ef42bd0d25e50317d2e9a40a84a0d111a0e1a36be2df6b000f729e1dc452"
+    },
+    {
+      "path": "berdlytalksuggestivedark.png",
+      "hash": "6a2635218d0c95b6b581a7cafea3fc115c02945e3dc3df102ba56eeca84bf960"
+    },
+    {
+      "path": "17_processed.png",
+      "hash": "46cd3782b1e156b78340066cce79774118988904eb6f5e555b5a363a8eb71b54"
+    },
+    {
+      "path": "9_processed.png",
+      "hash": "bbc4bed5da4d6019a84ee8cc61487e42cee1f34b4be2e6effaa3b8d6c69cddff"
+    },
+    {
+      "path": "18_processed.png",
+      "hash": "d6003d554253ad413476faadf6067956994670ea52c99a4fa31364071fc10499"
+    },
+    {
+      "path": "19_processed.png",
+      "hash": "336575d61851e572ac98402c541c4367a3176e9b3ff91fa576d76fdb158a6ab3"
+    },
+    {
+      "path": "52_processed.png",
+      "hash": "bba5c277d08e69b0980c1f481439cfe38d63ffff937a4e8722ea59000b3c978e"
+    },
+    {
+      "path": "24_processed.png",
+      "hash": "de9522976c1c69ab61b6aa6dcc981551822fa974ae64b3622b21bbe4f9230696"
+    },
+    {
+      "path": "txtenna4.wav",
+      "hash": "ab6b7aa7a88e21d03f79c3b25d640334c24924ffbeacc86c2de60c6f96c68d6d"
+    },
+    {
+      "path": "berdlymansplain.png",
+      "hash": "f79076d75ec4a28edd8516b3b6eadcf7020818756871610be549d4405efba92f"
+    },
+    {
+      "path": "kr4d.png",
+      "hash": "c445aae3b6c308bfb6fab1c275999e7e217284fbe174b1037f010ebaef559fca"
+    },
+    {
+      "path": "31_processed.png",
+      "hash": "d6cf76e2244166c8ad870e9c979c531d5b90864addffaa042585b900638eedf8"
+    },
+    {
+      "path": "berdlytoomuchlessdetermination.png",
+      "hash": "78f5d1b64ce4fabdf2f09cc5336ed8a1d5ce86b9d1b6a97b8f34af52772f6d18"
+    },
+    {
+      "path": "kr3d.png",
+      "hash": "013a19773fee669a0d4ffb05d964da5dc8a18640283f33cf85505ee0bf69be67"
+    },
+    {
+      "path": "ralslightsmile.png",
+      "hash": "6a8d75b47b7ec7c568aca937fd459e076f0c9ac1267bc9a5e371fae1f35de835"
+    },
+    {
+      "path": "pumpkin_boss.ogg",
+      "hash": "6f585c5a14692b142e189e0ff2d31d4008a0540d7260b1d3caf9a5d9bede2e41"
+    },
+    {
+      "path": "11_processed.png",
+      "hash": "c5c31272273551e8901c6af9d1fa7eb39be7be4b8421861f83b8e42adcff377c"
+    },
+    {
+      "path": "16_processed.png",
+      "hash": "80ac99a23ebe336a7746bc2b01e1544eff078322d183ef188855657dfd441beb"
+    },
+    {
+      "path": "ku3d.png",
+      "hash": "6f17e96ad537be757755680c6ad8790dcfc69931de51097938de0f06136aeff5"
+    },
+    {
+      "path": "queenworried.png",
+      "hash": "f512bcf4ed543a014f5368827fa9f4e2f3a7e98df913e2b90409f30924aedd62"
+    },
+    {
+      "path": "txnoelle.wav",
+      "hash": "a1e3c7fdabca8e0647cd08c809ffe362a4da8810501a162252ff1c2ae9274f2f"
+    },
+    {
+      "path": "4_processed.png",
+      "hash": "574c73617cf0dd304057091eb29827d02531e070aaa660a38bd2dd27c21fbaaf"
+    },
+    {
+      "path": "nubert.png",
+      "hash": "4bf7375b3ca318ab051e849e161aa96b3822cb2c1a952ddd84dee6818657e096"
+    },
+    {
+      "path": "queenOHGREATHEAVANSITAPPEARSIHAVEFALLENTOTHESHITSQUAD.png",
+      "hash": "62bca306219495309d286c5edf852bb094037797728ee2f4179886ad81312515"
+    },
+    {
+      "path": "susevilnoeye.png",
+      "hash": "793f0bae61e6b5aa236ff998975bf4015dcfeb7cc2ba29fcb986822bc4d01b69"
+    },
+    {
+      "path": "berdlyheartbroken.png",
+      "hash": "eb121de4e8c0c427d320d865b7253dd01e8f7201da624c45839dedbc64a543db"
+    },
+    {
+      "path": "txtenna3.wav",
+      "hash": "e47633cdc3f6616ff5901737c1458663dbf6492588e28904e233cdbbf7211cf3"
+    },
+    {
+      "path": "berdlyoh.png",
+      "hash": "3eb94b6528fff301e3cf657982238e3938aa3d9192a3f51eda8720f6fe863cbc"
+    },
+    {
+      "path": "queenbigerm.png",
+      "hash": "a7f5fa656924a66dd12c102ccc43dc055d8e17287739d5936a416658e7cde07f"
+    },
+    {
+      "path": "28_processed.png",
+      "hash": "1b6ebb533e9da47f9cc7fa76346c187a16b3df330a34c11775757dc570892c1f"
+    },
+    {
+      "path": "berdlydetermination.png",
+      "hash": "62b566a55866e26fd0156c8a3ebea884fa0debe672e0cd32c4cc6e58218568e6"
+    },
+    {
+      "path": "txtenna10.wav",
+      "hash": "6e93b8bc929ea522bfce4270deaf343668696fc9c5c28d4dafcdaa90c8a2bece"
+    },
+    {
+      "path": "kd2d.png",
+      "hash": "c038a38cae9d0afd328aca700852f48dd630f86f8fc6c874a0f8ea2b1d9dc4d6"
+    },
+    {
+      "path": "queenyell.png",
+      "hash": "f71d08c38753291a96388c181980040f6c483dac2fc54ceac293b3b1f3e6ea80"
+    },
+    {
+      "path": "berdlymoreheartbroken.png",
+      "hash": "291926e94162b28244b4dbf1e00812278428785f4d72f5a49f88cb2a8cd69ed9"
+    },
+    {
+      "path": "berdlyohdark.png",
+      "hash": "c7470f4a469a3afc365891c9f48e89866c9d4b4008d303113ebd95df57023970"
+    },
+    {
+      "path": "sr4d.png",
+      "hash": "6a90e33a9baab5f849cf47352076abf16fd2e474353e3b477b97a95a8342ee62"
+    },
+    {
+      "path": "school.png",
+      "hash": "c705cc10f4b681e8fa6dc32ee66b85cefd5808d48bffd7e787b6917e1682fce4"
+    },
+    {
+      "path": "ralgrumpy.png",
+      "hash": "57788defd442505e058d2471d5b471b4565822120b9842903daf911261eea7e1"
+    },
+    {
+      "path": "sushappy.png",
+      "hash": "bddf225f90b61c18156b78ca8bca979b530f44e626e54edd3bc961360ac36eff"
+    },
+    {
+      "path": "su3d.png",
+      "hash": "7c7aa2b668d5eb4c6d3dc3e3a755cced3cfdbbef6261279c967436627de772d3"
+    },
+    {
+      "path": "berdlybutyouarealidiotnowdark.png",
+      "hash": "9c2c954e740f4bc3ac92f267cbdf3335d88bd62adcc900e6c8632ab36e898d54"
+    },
+    {
+      "path": "undertale-deltarune-text-font-extended.ttf",
+      "hash": "d2a043ed58a55d9546d68b2fd21bd64a810393ebae50556f7827fe4380218fc6"
+    },
+    {
+      "path": "berdlymansplaindark.png",
+      "hash": "440b40e42c9205dac8f501f08ad7dfa69b7c9e38bea129b652b6095a341e279d"
+    },
+    {
+      "path": "oldman_helps_out.ogg",
+      "hash": "578b8d4c057b2140a28433c270ee56d3c85ecbcb9b064e8b5582693b66d59b06"
+    },
+    {
+      "path": "cyber.ogg",
+      "hash": "ad67f509309ef6940d9c8e8513f7acf90daf7b1b848997c17785b1819b57a9b0"
+    },
+    {
+      "path": "56_processed.png",
+      "hash": "1d636f27ef99ca6bee82fca8e602e7937bbcf983ce8eb6ab9fcb4b52748f3626"
+    },
+    {
+      "path": "54_processed.png",
+      "hash": "dd360af361bc9cf30bfd94ed3fae6ecf70b7822edaf981ca13af947bb5423e52"
+    },
+    {
+      "path": "59_processed.png",
+      "hash": "d66dbe8b28d391dc4f717a512c865724914a701a800d9a501b3a35a4ad12498b"
+    },
+    {
+      "path": "33_processed.png",
+      "hash": "f590176f1c9a2d62c68960d0ce183984efbdc48293bbf731a689317875ff8fed"
+    },
+    {
+      "path": "43_processed.png",
+      "hash": "ffc6380f5a3297097e84fc4634dbb49a1da26aa4ba6a32c0520426ab6fd86fcd"
+    },
+    {
+      "path": "berdlytalkworrieddark.png",
+      "hash": "827bb99d7ac0cfeb0f911c1dbe32864548bff51d244b605573f4d6253dd83e96"
+    },
+    {
+      "path": "ralfrown.png",
+      "hash": "d275f3d9ba31af4619804e6646dccbe2d8631628cefbba69198342a5f4dfacd2"
+    },
+    {
+      "path": "45_processed.png",
+      "hash": "0c1ec9d0a2b2b87e3e4452ed5acc9aec8df93ba98beae60eb571b26d58bde7b2"
+    },
+    {
+      "path": "lancermustacheooo.png",
+      "hash": "0f9588ba648253f484f87566febb1e304cf1410db7eee47212abee026a179ca6"
+    },
+    {
+      "path": "ralsuprised.png",
+      "hash": "ec75ea4255bd893ce3aa2ca21aedffbd5885f8dbd071acf1d921f26696ae64e4"
+    },
+    {
+      "path": "61_processed.png",
+      "hash": "0c5872ed836c616423618c3f3e5ea51935937a9c25aaea6738cd2eb907475a58"
+    },
+    {
+      "path": "kd3d.png",
+      "hash": "9fd2a0691cc33ca62f01dadf3ab5cc3c4713372c7f6c99b593bd07083423ebbb"
+    },
+    {
+      "path": "41_processed.png",
+      "hash": "46b364020dad195e153e7724a22f500fc00d502d06c47148afd3a07d695a25b4"
+    },
+    {
+      "path": "49_processed.png",
+      "hash": "f850cff203ef5198133269e3500d7eecda53ac915bb0c6edf88f417a2915fc42"
+    },
+    {
+      "path": "alpblush.png",
+      "hash": "c4d787b26d583b4e34214139b737e312b8152a9e5e8c72383b1fc0031d0c6b72"
+    },
+    {
+      "path": "8_processed.png",
+      "hash": "921ed3aa75b26e407974609cf5fa2ea291a29691112d9096508817e6a464bf25"
+    },
+    {
+      "path": "lancersad.png",
+      "hash": "16f870a4671fcd0605b55bb7d95444e2a71988c98f045174701e8dd1486c64e8"
+    },
+    {
+      "path": "raining.ogg",
+      "hash": "cc22e506ec68b68dc45f2b213b4b67b34c0f7a75da07ff989f0e53ad0f435ee6"
+    },
+    {
+      "path": "47_processed.png",
+      "hash": "5377e7333092c2e3b6ca21bf528b8824e36176457ef642e38baca30b652ededf"
+    },
+    {
+      "path": "ralnoglasses.png",
+      "hash": "c1cba2305c0a48851ceab28b9c6025fe794c51c74a38c3e2425750a5c02d804c"
+    },
+    {
+      "path": "lancerveryhappyandconfident.png",
+      "hash": "e88e8f935d998e384cfa3ecec6764d0f6a1e8618f23ae99ec54083dd03700da3"
+    },
+    {
+      "path": "53_processed.png",
+      "hash": "3a632b26f20635b94c183bf353cd1cd195c55db1fa9b702989ffae36c2c8b1d0"
+    },
+    {
+      "path": "10_processed.png",
+      "hash": "00a652a56a0bf70d25175df2a54d4cafdd9c34271d3431825c7da84ca3195e25"
+    },
+    {
+      "path": "lancerconfused.png",
+      "hash": "4bfe1c9049c5cc7616aae171554a2e567aa4a5920b8b44275c6aba867033a54b"
+    },
+    {
+      "path": "58_processed.png",
+      "hash": "2804c2bbfab99291fcfa5887250a0d77d928a732e0108142f395557179ac34de"
+    },
+    {
+      "path": "susnomouth.png",
+      "hash": "b883083af4266c47e8f18d4c14cdffc78f7d288a9508856cb5b4f2dd2f333ad0"
+    },
+    {
+      "path": "raloh(question mark).png",
+      "hash": "47a009d8d019a3afd2eaa8fc6a6eea5a1d6da47a7d1c81214b45a0ed29d48c66"
+    },
+    {
+      "path": "acid_tunnel.ogg",
+      "hash": "a5885437e7ec959bc49e07f03ec29d2396dc7326b76452cedc64ec71c3094d26"
+    },
+    {
+      "path": "AUDIO_ANOTHERHIM.ogg",
+      "hash": "b1561440e1e28256dfc225c3000e29c4f47e545f23b0b548e7608c8d01ec045d"
+    },
+    {
+      "path": "mus_school.ogg",
+      "hash": "888d1f33c77e24ff7c16c5e5cf5c29fd5d4c91b944dfa40a5e7aee4279e39138"
+    },
+    {
+      "path": "26_processed.png",
+      "hash": "4dd616742da5b89c87c78e00f0d282936fc431f1a9478ec2c9ebec6a0c4c2989"
+    },
+    {
+      "path": "rouxlswink.png",
+      "hash": "228aee173b48f34c26b08df4b50e8e6964ccf525ac084a175cb016b0046c1164"
+    },
+    {
+      "path": "alpermbuttheyarelookingaway.png",
+      "hash": "36c4a333afcc81091576bb42878d471addcc9c3b185e812c795df2d55cda072e"
+    },
+    {
+      "path": "55_processed.png",
+      "hash": "186336c9ec55a0e78ea2db14b767c4c210fc835901c6adb2c5707398ee155cc2"
+    },
+    {
+      "path": "lancerbigsmile.png",
+      "hash": "5bfbae8b3b4f2f3934f120a255be8019d3f274166dbcc6b1e19e1439dc8ae4b0"
+    },
+    {
+      "path": "rouxlsnormal.png",
+      "hash": "5e08bb524c3d5fa7c540860101e459e0783856224cb8b04fffac3d185bb2a3d4"
+    },
+    {
+      "path": "rouxlsscared.png",
+      "hash": "3dbaa9cd9217254b3b50fd3df7a57314c8ceba3b645a975fba34fdad5c46510e"
+    },
+    {
+      "path": "0_processed.png",
+      "hash": "550a94a2abb9379dac8cde82b44f847509dffb53eea2b43b7a20fee495c0af61"
+    },
+    {
+      "path": "queensip.png",
+      "hash": "4144456738c0d04c2c760d3c06d24748fab37b7e87d35e0febc456de246f6f09"
+    },
+    {
+      "path": "sl3d.png",
+      "hash": "a41e9bce6c4820457ff67d25ff4bbb7787602c24f016ea4f09efe7b092fc3c87"
+    },
+    {
+      "path": "rouxlsOHGREATHEAVEANS.png",
+      "hash": "1d608cc97911db9798e0eabef41f0bb433c203fed9ba73f9132286ab95dddcff"
+    },
+    {
+      "path": "48_processed.png",
+      "hash": "079b2c72a7fa6890f7f82861174c14bcf56a9c218360c4cb3e1378875db28022"
+    },
+    {
+      "path": "kl2d.png",
+      "hash": "0c34c82625aaf1bd321a3f603bd5608b30d73a5ededc0fd70ac8b2431ac3797d"
+    },
+    {
+      "path": "berdlymischivoushappy.png",
+      "hash": "67a4ae0a0fe5783ad66dfdf3a8327605d332a6daf69cc272193af55d64a65e19"
+    },
+    {
+      "path": "62_processed.png",
+      "hash": "78706fc0b1fb9530a07ebd571d41f40872960f50330ecd0db44406e63b8d38b7"
+    },
+    {
+      "path": "51_processed.png",
+      "hash": "6aa31e1e97c46071158d5bfaa8f22ac03744e1e418f583cf99def3d724f4aad1"
+    },
+    {
+      "path": "lancerohno.png",
+      "hash": "d602e244cb7bc0bbccaebd5d62f9e3628cbca1aafd3fc53d13d120a515fafe7f"
+    },
+    {
+      "path": "ralbecomingunsad.png",
+      "hash": "6ba8ad10d1a41d64f22d4f503aceddfdd2d4a341e0f3c421f5719c6bc63478aa"
+    },
+    {
+      "path": "ralneutral.png",
+      "hash": "cabf557f30b4337267361335c72bcffe584b798b06908c2b0f5ba83413b353c0"
+    },
+    {
+      "path": "39_processed.png",
+      "hash": "d5b2ec7beca1e4f560743f5dab9f7a3cbcc6c8c813e4cb5a857abac8d9df0dbd"
+    },
+    {
+      "path": "suslessdetermined.png",
+      "hash": "1fff7b9f374af32fb5ca4331b2956326cee695f3aa8601b0177068cacfda1930"
+    },
+    {
+      "path": "ralblushsuprised.png",
+      "hash": "e88689d132a0ee2d269039267a5029e8c005394bc6ddf3f6a4a9a62560daceb0"
+    },
+    {
+      "path": "38_processed.png",
+      "hash": "72cf8840d8f553d55612f540053267d32498fcc259118698e7ff71d34b020fe1"
+    },
+    {
+      "path": "ralblush.png",
+      "hash": "2a809e2318051b9a3885f04326e1f76a47074dc0634fef877d31b1ebc3ea1194"
+    },
+    {
+      "path": "lancersadlookdown.png",
+      "hash": "827b5779ec6905a5e023e13281af5c58bd590e3f099df4dc8d8062ffcd2e8860"
+    },
+    {
+      "path": "susdetermined.png",
+      "hash": "4fd172d4294f9ed85656571c4b6edb6b66e55051776a94b92066f78d077c63d5"
+    },
+    {
+      "path": "rouxlsscaredbuthesnotlookingbehindhim.png",
+      "hash": "1879f06faa700468318da6cfbc4ba2ea2dc3127e7d093215b14f131c2e377867"
+    },
+    {
+      "path": "ralconfused.png",
+      "hash": "d0876ba6959a44df92aede03bbd2003c4245a776e16cf49c01f872f0a906f0b9"
+    },
+    {
+      "path": "mus_confession.ogg",
+      "hash": "7db1a507c192075c2ee29d7d307bc95e1e485d9f56bf9afb84e8dff242700426"
+    },
+    {
+      "path": "lancerveryhappy.png",
+      "hash": "a61a8d1d8dcffaab8a5b39938487c0e04fda3488e67c7f491119f048f06e27d7"
+    },
+    {
+      "path": "ralnormallookright.png",
+      "hash": "d00326186d84e754caf8a61b9894649867dadecc888a1e8952a601ac47e48554"
+    },
+    {
+      "path": "ralveryangry.png",
+      "hash": "90de1c4a94a1df73e67d21f4914da5b84484fe7a4f4075f7b95c894130cf90d8"
+    },
+    {
+      "path": "berdlyevenlessdeterminationdark.png",
+      "hash": "ed8080337725816cd7fb87503a856428eb7252309a64cf213e899ebdafbe4925"
+    },
+    {
+      "path": "5_processed.png",
+      "hash": "6d08205f3bfc872ae8fa2519901faed767504e2dbe12e13d04de6c59c6b07be5"
+    },
+    {
+      "path": "queenoh.png",
+      "hash": "cfd810b2237619ce2250c7ebff69084336a5296c834ada9207cfae8cb9cebc3e"
+    },
+    {
+      "path": "sl1d.png",
+      "hash": "a41e9bce6c4820457ff67d25ff4bbb7787602c24f016ea4f09efe7b092fc3c87"
+    },
+    {
+      "path": "queensticktoungeout.png",
+      "hash": "ee217f39b2a6ea9c5f16729a0610eeb0bafaa3f9a5591737dc790adeed690146"
+    },
+    {
+      "path": "berdlycharismamode.png",
+      "hash": "7fd907dfdcbf126708261ade84c982e0e001feb3b643a513c9a71a275b349cdc"
+    },
+    {
+      "path": "lancermustache.png",
+      "hash": "555919273635426e88d849f34c72c3d0c78554e720a1abed835bad2ec7665ff0"
+    },
+    {
+      "path": "txlancer.wav",
+      "hash": "a4c2fa10afb418e694ffa11c6ccd6fb8ad37b125fb909160b2e1a9d5266f542c"
+    },
+    {
+      "path": "rambwink2.png",
+      "hash": "ee7f6b572c2a8d2d49b016b3961c99d2d0df2818a8bb97f3276580e5f698a68c"
+    },
+    {
+      "path": "raldevious.png",
+      "hash": "f1592cddfce3bfa78250007955256d264151c51093d047708fd3cbc0d254559e"
+    },
+    {
+      "path": "ralfearslightsmile.png",
+      "hash": "69eeead2ec35b7722d584478e9dbd5df6fb3276c67787350891d5b2bc28226d5"
+    },
+    {
+      "path": "queenlookleftoh.png",
+      "hash": "8ccb16e1b33e52d25b56c81621698b788bccc8f5bc61adacd00a30bf022a7858"
+    },
+    {
+      "path": "raldarkglasses.png",
+      "hash": "4bff2ac9b007c00d556db0096085d2e9f47cc17a7d19a99f33a501da16a2068f"
+    },
+    {
+      "path": "sussmile.png",
+      "hash": "0d2f5d0d77da315226bf9cd83400a85c9cae34c677a4c4cbf3ec94aaf2e75a41"
+    },
+    {
+      "path": "ralgasphappy.png",
+      "hash": "c5e8e391eaebcb7750bf78239460507fe0b21bdceb02879d476c65fb139480a3"
+    },
+    {
+      "path": "sd2d.png",
+      "hash": "2f6128bdeda9c3f378ab922e240176b013b8abe5983745ab309a943ed26d2575"
+    },
+    {
+      "path": "txspam.wav",
+      "hash": "a59835cc4b759efd78848c6023bbbcd90461d914da8e60784d52212b2b39e435"
+    },
+    {
+      "path": "queenveryconfused.png",
+      "hash": "3308780bb6d3d1e1befbd7ecfd33ea3e1537a5b1bfe46365aba1893989c54c3a"
+    },
+    {
+      "path": "rambwink.png",
+      "hash": "c3fa5044ea90a15d97c504f3e6e1da54e6e304f6d5f9b048b12ce040c104fdb2"
+    },
+    {
+      "path": "ralexplainsadthinglookright.png",
+      "hash": "b1e11e0d9e8e3bea46a5f08be88cd69012d6fd137f6bd163db102c882a40118b"
+    },
+    {
+      "path": "txral.wav",
+      "hash": "0fc3e81515eba726ca622062a147640255ada372b93a16602b5f8570f798e4d1"
+    },
+    {
+      "path": "rambdrunk.png",
+      "hash": "db7322b4f8fce79733d65f04ecbf2091999875efd6c9c73dbbc1ea627d4aa92a"
+    },
+    {
+      "path": "queenlmao.png",
+      "hash": "7cedff4995d157172bc9cc4275c9dac4f011855e81d92b59df2e6edb88160f19"
+    },
+    {
+      "path": "april_2012.ogg",
+      "hash": "a54c6916058beafd57b78b2c15fe54e26edabbb87e5cc364be572991f140a978"
+    },
+    {
+      "path": "tv_changingroom.ogg",
+      "hash": "91d4ca6f16cd84a50111c22f211092997e7b0567608fb7f9663794fe0bb5094e"
+    },
+    {
+      "path": "rouxls_battle.ogg",
+      "hash": "c502041d7170d1b8511adb33cd7a2ecae5eb1bff2130acf26881cf43a2e31cd9"
+    },
+    {
+      "path": "battle.ogg",
+      "hash": "888c10611589bf38d540a472dedb43e25baed165fdcc77ff39fec37beeab3cd2"
+    },
+    {
+      "path": "giant_queen_appears.ogg",
+      "hash": "98a2511eed9dc6ab5545cae5208ce92e71625bcdd4c1f68317465698f4223674"
+    },
+    {
+      "path": "txtenna8.wav",
+      "hash": "7ac0e36f5202286465ea0afe20f9ef7baa2f1dd0f6e38c1f818aca52a1542dd9"
+    },
+    {
+      "path": "queenhaha.png",
+      "hash": "d5b3dbc760fc4ae7689c774b305092641e91c7e1d3461f32e8e500bbde2d6734"
+    },
+    {
+      "path": "ralsmile.png",
+      "hash": "bce2677f5a92ac805488109fa976dddc3655db1e1caaa1445d2528854b254406"
+    },
+    {
+      "path": "queenconfident.png",
+      "hash": "1a5ec0e04eb5372fe1dccb03caaec4cb2db5319abe8de4f5c4aa36abc5a7aa53"
+    },
+    {
+      "path": "Tenna.png",
+      "hash": "ee8ae1dd56eb49d66c12b05018a5216ee7327505039e5991d0ab56560dbea0e4"
+    },
+    {
+      "path": "queenhappy.png",
+      "hash": "d2c098c59428f581e4086d765617f8dbebca9781cb4e1286f8fe8b2de42414bb"
+    },
+    {
+      "path": "sr1d.png",
+      "hash": "2f7d09c8747f650e9b41ef089dc941b1e1226246921ff3798698d4f42f2892d5"
+    },
+    {
+      "path": "queennice.png",
+      "hash": "7e2b79c886476dd59ef9d0137d607550e969039ab711822fc8ca43972673cb9c"
+    },
+    {
+      "path": "queensmile.png",
+      "hash": "493ed2fc99da1bbb982bd2c6d5a5bbaf3013968d5a4d8871771973255d89a550"
+    },
+    {
+      "path": "queenanger.png",
+      "hash": "cdb4737d183b53945b80c75333431dae64fc847930894d5f6a1a9f366216207f"
+    },
+    {
+      "path": "kl4d.png",
+      "hash": "fb99d47b9f5c8e143a734136d215faf32f0ea9ae4975839f83bdb3338c77f4e3"
+    },
+    {
+      "path": "berdlytalkthinkdark.png",
+      "hash": "5629aff7c53f6aeec3279c7c926c93754dc215ebed4d6fefec53e1d453a6750c"
+    },
+    {
+      "path": "alpreleived.png",
+      "hash": "53809d217c1e2b8ede5096f400855943c3477be57baa9e5de00f4192d4240df4"
+    },
+    {
+      "path": "ralconfident.png",
+      "hash": "5e8badea840ae26a84660656355bfacc1713b99d057493b3a9845eb34ee04d50"
+    },
+    {
+      "path": "queenlikebrowtf.png",
+      "hash": "20081f15189749d8d9b1d2b2b8329aa8a53bfbf0263c3d44b74b136952288ea4"
+    },
+    {
+      "path": "queennanananabooboo.png",
+      "hash": "0ecbd818eb8eb548211b125cdb2b2d388aa86ceeaeaf91877b14571dceb60311"
+    },
+    {
+      "path": "txberdly.wav",
+      "hash": "1abd2de1336db484da495f42c14b7a3936617ed62397c482376d46de62f15f52"
+    },
+    {
+      "path": "7_processed.png",
+      "hash": "243eaffe15aaffb7924d4e95d0488fd3b4d08b3afe61a9748433c1578f1e1bd3"
+    },
+    {
+      "path": "queentrue.png",
+      "hash": "8ad03d6002ee1d65b5ca7b78e1ea53715b3cbdd496f58627a863b9e20de0f542"
+    },
+    {
+      "path": "queenlookleftsmile.png",
+      "hash": "1894b346dab372bf008b7a1fd0b76f54f3293319049149c43cccdc0f42c097da"
+    },
+    {
+      "path": "queenhmm.png",
+      "hash": "41f62350ac99c3a0b21992bac1cfb686e70f1a03169e66895433d07b053b8458"
+    },
+    {
+      "path": "kd4d.png",
+      "hash": "73ac73687c1881f823914ad3bb494afd239448b2b9c9583dc2840cf0fc62e31f"
+    },
+    {
+      "path": "queenerm.png",
+      "hash": "68a362b9491de946a947ae12e5a016a10007d266b6d8fe87a20830d14bd8ca64"
+    },
+    {
+      "path": "queenlookright.png",
+      "hash": "a97871225010a140a1123ffd805ab30e3c9a1585b28aef2dd49af4251ed131d2"
+    },
+    {
+      "path": "su4d.png",
+      "hash": "536fe6be8f8c677cd7f85246cf3fb94b6af2e69324f06ae079b7bf6db9030470"
+    },
+    {
+      "path": "queenhate.png",
+      "hash": "97d28ac2b1b893885a95f4af0e1ecbaf89d88de24725d42df16382186b98e766"
+    },
+    {
+      "path": "su1d.png",
+      "hash": "7c7aa2b668d5eb4c6d3dc3e3a755cced3cfdbbef6261279c967436627de772d3"
+    },
+    {
+      "path": "kd1d.png",
+      "hash": "9fd2a0691cc33ca62f01dadf3ab5cc3c4713372c7f6c99b593bd07083423ebbb"
+    },
+    {
+      "path": "card_castle.ogg",
+      "hash": "fbcdf4c29e14a2ab1566d3179faee537551effbed89e554cfbf1de63c953170c"
+    },
+    {
+      "path": "gerson_theme_nointro.ogg",
+      "hash": "bb11b8922298904fa8ea13330e90a21da53b0e9531199c1211c9a2491d65e779"
+    },
+    {
+      "path": "sr3d.png",
+      "hash": "2f7d09c8747f650e9b41ef089dc941b1e1226246921ff3798698d4f42f2892d5"
+    },
+    {
+      "path": "alpgasp.png",
+      "hash": "e1d8d5084b18039635726eb8f155c3b4e6cb7ab705bff0c68d0c1da200aee68c"
+    },
+    {
+      "path": "queenidk.png",
+      "hash": "c312e282e1c92c4ef1fb566c4d553e1298c53120427b33744e7677d910f5990c"
+    },
+    {
+      "path": "queenHAHAHA.png",
+      "hash": "6bfd922120c95337cbdf7b7506334eb2ee1773d48caadc91363c4de1b1c5f0ba"
+    },
+    {
+      "path": "36_processed.png",
+      "hash": "6fdb2b4dbe4c74291f86aaeb3ac174a49d9f47090a199c987f2edc96e2a66dd5"
+    },
+    {
+      "path": "ralgasp.png",
+      "hash": "09046b897b55c15e7de66b5164663804be9dfd776ee35aa2deffecbec03eac69"
+    },
+    {
+      "path": "57_processed.png",
+      "hash": "4343a6c0f1fb0f8b0df423e284e299433fa89c90d312702c19c479d569f95d17"
+    },
+    {
+      "path": "berdlyjoydark.png",
+      "hash": "0dfe9355dc9fec6e8154a237f0015d759f7a12c9209b51cac8632f79deef1dca"
+    },
+    {
+      "path": "queenlying.png",
+      "hash": "b158a4417fb4f7c02428d96a5c0fbd90b13a859bee46a54693c716696a403df3"
+    },
+    {
+      "path": "ralfrowneyeshalfclosed.png",
+      "hash": "47d1856796bfa863f797067107834f5c2d04c906c93d2799d6206a896e4d775e"
+    },
+    {
+      "path": "berdlykiss.png",
+      "hash": "5d3e77996561f5babc35933d3a0a3dacc1fc99b268e9d0c71b1cb60837fd932c"
+    },
+    {
+      "path": "ku1d.png",
+      "hash": "6f17e96ad537be757755680c6ad8790dcfc69931de51097938de0f06136aeff5"
+    },
+    {
+      "path": "ralhappyeyesclosed.png",
+      "hash": "a0b48357536e7ccc14858268cbd90865822504d29740417255bcd1c535629cb8"
+    },
+    {
+      "path": "spamton.png",
+      "hash": "db4bd24fd6c19512f28cdd38b5c961849bc5774d77015a047354c5caac7c0e65"
+    },
+    {
+      "path": "berdlytalkdark.png",
+      "hash": "04848b8f132d8ff128017214832b130b218074905ea0cb613649c3e5b593c5b5"
+    },
+    {
+      "path": "su2d.png",
+      "hash": "ec4a556af8312b40c57badcf8bfddc558e0f551b2c0517a8f1091d58e6701e65"
+    },
+    {
+      "path": "ralshocked.png",
+      "hash": "7d20ba0c0ac69e28366f0203627637921762d7a9f9db6a7b074fdc5bf8ecc510"
+    },
+    {
+      "path": "queenbigevilplan.png",
+      "hash": "03ec2cfeb477d981b7593ee605c7e8b1d2d7641b10aaf856573fe711a158e395"
+    },
+    {
+      "path": "sr2d.png",
+      "hash": "5026714f5eb324f18ccfa849f10d0a94d162c7dbe603e1ba2b871e4e1a293747"
+    },
+    {
+      "path": "sl4d.png",
+      "hash": "d64df81cbfd5d05cfec48ac2c834be2ca0703eaa7193f2920243e487c453dc7e"
+    },
+    {
+      "path": "sd1d.png",
+      "hash": "9f78a9d9e517cc11ce24aa7facc86d0f261b04423371c96fb8ba0e3b3c777718"
+    },
+    {
+      "path": "pinkgasptalking.png",
+      "hash": "e7d29a8b4a72b0b7724f043588d99f593c7eb38a1a41c2aaff3b4f0273e4b05d"
+    },
+    {
+      "path": "ralangry.png",
+      "hash": "aa67960f6ebfc75d0ab4cfef342f1809f11d491dacddc9f3bd908bccb913f111"
+    },
+    {
+      "path": "berdlynodeterminationdark.png",
+      "hash": "fdf8143a89c9eaabc37e7af9aed97ced61d0ab7f069d4e6339152bda881c999b"
+    },
+    {
+      "path": "berdlysurprisednervous.png",
+      "hash": "95137312897f40405d91ca01935e58e10f3ace78ddbcf14d2564c5e7fdc9bfd9"
+    },
+    {
+      "path": "kl3d.png",
+      "hash": "e897a099c0f1a1d5519a77414230135517f2e2f64fcda6831fd542f01ef5e179"
+    },
+    {
+      "path": "ralblusheyesclosed.png",
+      "hash": "848f7c9b90cf1c8aa3205c72beff4b7a4022b223c2d538bc7c10cecb0ea032b1"
+    },
+    {
+      "path": "lancer.ogg",
+      "hash": "ae73bc3799b3bc0ea719f0666dd79081c7631b88468155c01a3ec754d396752a"
+    },
+    {
+      "path": "noelle_normal.ogg",
+      "hash": "ada7b196658c1949987b63149793d44eda2ec8448a7b79f3a54d07bfe175d700"
+    },
+    {
+      "path": "checkers.ogg",
+      "hash": "44641263d1a7689a5fe7ec8ea864f039aa62a4829a2a67c25a453a4539868ad2"
+    },
+    {
+      "path": "berdlyjoyeyesclosed.png",
+      "hash": "ecea3a7c02765b214d5cad782a5ad916c6cce7ee462ae4853c63a06ac9a8b7ef"
+    },
+    {
+      "path": "pinkgasp.png",
+      "hash": "9b12287a32a917d23336c591886930fcf96b66aec1a45c7589c44e550f41dcee"
+    },
+    {
+      "path": "13_processed.png",
+      "hash": "e4e8c3f7f91175f5c96e9e2702bcfcb83657355583dbd4b919e5a366ab69d8cb"
+    },
+    {
+      "path": "46_processed.png",
+      "hash": "390c569b514bcfc3bd7f3283ae752afc07e12bcc5ad92167d7d93e90417c5ed3"
+    },
+    {
+      "path": "50_processed.png",
+      "hash": "da2cea392d03f004efabff1dee93fd6960a29a073f4d804834f4e22c9120b62e"
+    },
+    {
+      "path": "rouxlsmouthopen.png",
+      "hash": "2ef9bce9c7b26f358627e23695214ff86dd286946d5a99bd352408ec6da0d900"
+    },
+    {
+      "path": "ralnormal.png",
+      "hash": "fd7338396546e3d12e843f1fdbbba1e7c4accb9b13e5d4a1afce88e20e52c14a"
+    },
+    {
+      "path": "rouxlscalm.png",
+      "hash": "65841d2292a5d676662ee8edc04d9076abba7cc1fb537a127affc43bf663c0c0"
+    },
+    {
+      "path": "30_processed.png",
+      "hash": "d71cec87938072e6fa5a0f19209ff603b9637eff9245aaaf0d31c9cbe4e02fed"
+    },
+    {
+      "path": "29_processed.png",
+      "hash": "ca6260b742b5104316fb4ae287a605fa1b620998ea0b2e0b0860bfec320cb043"
+    },
+    {
+      "path": "berdlytalk.png",
+      "hash": "5de7c4bdba1e05d3418250345e804e3b9813b4d9a32607ca7dea546d2ece2abf"
+    },
+    {
+      "path": "27_processed.png",
+      "hash": "ff9265383c22e9a3b279cb4533655b9c8909d007a5302440764ce019c5167494"
+    },
+    {
+      "path": "lancerveryconfused.png",
+      "hash": "a55b185988ca53d4e09a7377636a5372c6062670217f8327013fc968835d31c4"
+    },
+    {
+      "path": "sd3d.png",
+      "hash": "9f78a9d9e517cc11ce24aa7facc86d0f261b04423371c96fb8ba0e3b3c777718"
+    },
+    {
+      "path": "25_processed.png",
+      "hash": "3d3f003e5bc06c532947e275570a49aa2239fd0400317cfc0381801e945edfdd"
+    },
+    {
+      "path": "pinktailf1.png",
+      "hash": "efe5e01efe07ee3fc3d137ce7ad6e248aa5e5856948714336151561f2aa29a9e"
+    },
+    {
+      "path": "lancerderp.png",
+      "hash": "0ca4de7003d56ab1b98955ca6296702b037a890e06931d94fb7a1abee329c6d5"
+    },
+    {
+      "path": "pinkshock.png",
+      "hash": "56de9751cba9a3c7ba0418657e266ea26014015eb001eb90dea40af28f84f65a"
+    },
+    {
+      "path": "index.html",
+      "hash": "bc2ef5384c7f86497024fe2859b913d0381badf20b83d78a7aca9b06cd646525"
+    },
+    {
+      "path": "berdlythink.png",
+      "hash": "1cc4decbdf929e772de70852bf3b196b880143ad0785b651f6550a66b6f3fcba"
+    },
+    {
+      "path": "script.js",
+      "hash": "564402b9690c90fae7e35a621d1bbd937aef3c46c0e9c67c243bf11d8cad561b"
+    }
+  ]
+}

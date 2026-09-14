@@ -1,0 +1,292 @@
+#!/usr/bin/env python3
+import json
+import os
+import re
+import time
+import urllib.error
+import urllib.request
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import urlparse, unquote
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(ROOT, "localdata")
+CHATS_DIR = os.path.join(DATA_DIR, "chats")
+PORT = int(os.environ.get("PORT", "8080"))
+GROQ_KEY = os.environ.get("GROQ_KEY", "")
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+GROQ_IMAGE_MODEL = os.environ.get("GROQ_IMAGE_MODEL", "black-forest-labs/flux-schnell")
+GROQ_URL = "https://api.groq.com/openai/v1"
+LOCAL_USER = {"id": "ketchupdev-local", "username": "ketchupdev", "avatar_url": ""}
+PLACEHOLDER_IMAGE = "/susnormal.png"
+
+CONTENT_TYPES = {
+    ".html": "text/html; charset=utf-8",
+    ".css": "text/css; charset=utf-8",
+    ".js": "application/javascript",
+    ".json": "application/json",
+    ".png": "image/png",
+    ".gif": "image/gif",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".svg": "image/svg+xml",
+    ".ogg": "audio/ogg",
+    ".oga": "audio/ogg",
+    ".opus": "audio/ogg",
+    ".wav": "audio/wav",
+    ".mp3": "audio/mpeg",
+    ".mp4": "video/mp4",
+    ".ttf": "font/ttf",
+    ".otf": "font/otf",
+    ".woff": "font/woff",
+    ".woff2": "font/woff2",
+}
+
+
+def now_iso():
+    return time.strftime("%Y-%m-%dT%H:%M:%S.000Z", time.gmtime())
+
+
+def groq_request(path, body):
+    if not GROQ_KEY:
+        raise RuntimeError("GROQ_KEY is not set (run with GROQ_KEY=... )")
+    req = urllib.request.Request(
+        GROQ_URL + path,
+        data=json.dumps(body).encode("utf-8"),
+        headers={
+            "Authorization": "Bearer " + GROQ_KEY,
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=120) as resp:
+        return json.loads(resp.read().decode("utf-8"))
+
+
+def groq_chat_completions(messages, model, json_mode):
+    body = {"model": model or GROQ_MODEL, "messages": messages}
+    if json_mode:
+        body["response_format"] = {"type": "json_object"}
+    data = groq_request("/chat/completions", body)
+    try:
+        return data["choices"][0]["message"]["content"]
+    except (KeyError, IndexError, TypeError):
+        raise RuntimeError("Unexpected Groq response: " + json.dumps(data)[:500])
+
+
+def groq_image_gen(prompt):
+    body = {
+        "model": GROQ_IMAGE_MODEL,
+        "input": prompt,
+        "max_output_tokens": 480,
+        "response_format": {"type": "image"},
+    }
+    data = groq_request("/responses", body)
+
+    def find_url(obj):
+        if isinstance(obj, dict):
+            for key, value in obj.items():
+                if key == "url" and isinstance(value, str) and value.startswith("http"):
+                    return value
+                found = find_url(value)
+                if found:
+                    return found
+        elif isinstance(obj, list):
+            for item in obj:
+                found = find_url(item)
+                if found:
+                    return found
+        return None
+
+    url = find_url(data)
+    if not url:
+        raise RuntimeError("No image URL in Groq response: " + json.dumps(data)[:500])
+    return url
+
+
+def load_chat(chat_id):
+    path = os.path.join(CHATS_DIR, chat_id + ".json")
+    if not os.path.exists(path):
+        return None
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def list_chats():
+    chats = []
+    if os.path.isdir(CHATS_DIR):
+        for name in os.listdir(CHATS_DIR):
+            if name.endswith(".json"):
+                path = os.path.join(CHATS_DIR, name)
+                try:
+                    with open(path, "r", encoding="utf-8") as f:
+                        chats.append(json.load(f))
+                except Exception:
+                    continue
+    chats.sort(key=lambda c: str(c.get("updated_at") or c.get("created_at") or ""), reverse=True)
+    return chats
+
+
+def save_chat(chat):
+    chat_id = str(chat.get("id") or "")
+    if not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", chat_id):
+        raise ValueError("Invalid chat id")
+    os.makedirs(CHATS_DIR, exist_ok=True)
+    existing = load_chat(chat_id) or {}
+    record = dict(existing)
+    record["id"] = chat_id
+    record["owner_id"] = chat.get("owner_id") or LOCAL_USER["id"]
+    record["username"] = LOCAL_USER["username"]
+    record.setdefault("created_at", now_iso())
+    if "title" in chat:
+        record["title"] = chat["title"]
+    if "transcript" in chat:
+        record["transcript"] = chat["transcript"]
+    record["updated_at"] = now_iso()
+    with open(os.path.join(CHATS_DIR, chat_id + ".json"), "w", encoding="utf-8") as f:
+        json.dump(record, f, ensure_ascii=False)
+    return record
+
+
+def delete_chat(chat_id):
+    if not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", str(chat_id)):
+        raise ValueError("Invalid chat id")
+    path = os.path.join(CHATS_DIR, chat_id + ".json")
+    if os.path.exists(path):
+        os.remove(path)
+
+
+class Handler(SimpleHTTPRequestHandler):
+    extensions_map = {**CONTENT_TYPES}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.directory = ROOT
+
+    def log_message(self, fmt, *args):
+        print("[%s] %s" % (self.log_date_time_string(), fmt % args))
+
+    def list_directory(self, path):
+        self.send_error(404, "Not found")
+        return None
+
+    def _read_json(self):
+        length = int(self.headers.get("Content-Length") or 0)
+        if length <= 0:
+            return {}
+        raw = self.rfile.read(length)
+        if not raw:
+            return {}
+        return json.loads(raw.decode("utf-8"))
+
+    def _send_json(self, obj, status=200):
+        body = json.dumps(obj).encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _send_error_json(self, message, status=500):
+        self._send_json({"error": message}, status)
+
+    def do_GET(self):
+        parsed = urlparse(self.path)
+        route = parsed.path
+        if route == "/api/me":
+            self._send_json(LOCAL_USER)
+            return
+        if route == "/api/chats":
+            self._send_json(list_chats())
+            return
+        super().do_GET()
+
+    def do_POST(self):
+        parsed = urlparse(self.path)
+        route = parsed.path
+        if route == "/api/chat/completions":
+            self._handle_chat_completions()
+            return
+        if route == "/api/imagegen":
+            self._handle_imagegen()
+            return
+        if route == "/api/chats":
+            self._handle_save_chat()
+            return
+        self.send_error(404, "Not found")
+
+    def do_DELETE(self):
+        parsed = urlparse(self.path)
+        route = parsed.path
+        prefix = "/api/chats/"
+        if route.startswith(prefix):
+            chat_id = unquote(route[len(prefix):])
+            try:
+                delete_chat(chat_id)
+            except ValueError as e:
+                self._send_error_json(str(e), 400)
+                return
+            self._send_json({"ok": True})
+            return
+        self.send_error(404, "Not found")
+
+    def _handle_chat_completions(self):
+        try:
+            payload = self._read_json()
+            messages = payload.get("messages")
+            if not isinstance(messages, list) or not messages:
+                raise ValueError("messages is required")
+            model = payload.get("model") or GROQ_MODEL
+            json_mode = bool(payload.get("json"))
+            content = groq_chat_completions(messages, model, json_mode)
+            self._send_json({"content": content})
+        except Exception as e:
+            print("chat/completions error:", e)
+            self._send_error_json(str(e))
+
+    def _handle_imagegen(self):
+        try:
+            payload = self._read_json()
+            prompt = payload.get("prompt")
+            if not prompt:
+                raise ValueError("prompt is required")
+            try:
+                url = groq_image_gen(prompt)
+            except Exception as e:
+                print("imagegen error:", e)
+                url = PLACEHOLDER_IMAGE
+            self._send_json({"url": url})
+        except Exception as e:
+            print("imagegen error:", e)
+            self._send_error_json(str(e))
+
+    def _handle_save_chat(self):
+        try:
+            payload = self._read_json()
+            if not payload.get("id"):
+                raise ValueError("id is required")
+            record = save_chat(payload)
+            self._send_json(record)
+        except ValueError as e:
+            self._send_error_json(str(e), 400)
+        except Exception as e:
+            print("save chat error:", e)
+            self._send_error_json(str(e))
+
+
+def main():
+    os.makedirs(CHATS_DIR, exist_ok=True)
+    if not GROQ_KEY:
+        print("WARNING: GROQ_KEY is not set. Chat and image generation will fail.")
+    httpd = ThreadingHTTPServer(("0.0.0.0", PORT), Handler)
+    print("DELTACHAT running at http://localhost:%d" % PORT)
+    print("Serving from:", ROOT)
+    print("Chat data stored in:", CHATS_DIR)
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("\nShutting down.")
+        httpd.shutdown()
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,1170 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
+@font-face {
+    font-family: 'Undertale';
+    src: url('./undertale-deltarune-text-font-extended.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Boot loading screen: blocks the app, warms the cache, then fades away. */
+#boot-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease;
+}
+
+#boot-screen.boot-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.boot-box {
+    width: 320px;
+    max-width: 80vw;
+    text-align: center;
+    border: 3px solid #fff;
+    padding: 18px 20px 14px;
+    background: #000;
+}
+
+.boot-title {
+    font-size: 26px;
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+    color: #fff;
+}
+
+.boot-bar {
+    height: 18px;
+    border: 2px solid #fff;
+    padding: 2px;
+}
+
+#boot-fill {
+    height: 100%;
+    width: 0%;
+    background: #fff;
+    transition: width 0.15s linear;
+}
+
+#boot-pct {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #fff;
+}
+
+#boot-status {
+    margin-top: 4px;
+    font-size: 13px;
+    color: #ccc;
+}
+
+#overworld-container {
+    font-family: 'Undertale', 'Courier Prime', monospace !important;
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+#overworld-canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.game-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 2001;
+}
+
+#history-tab {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2100;
+    width: 34px;
+    height: 70px;
+    border: 2px solid #fff;
+    border-left: none;
+    background: #111;
+    color: #fff;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 0 6px 6px 0;
+    transition: background 0.1s;
+}
+
+#history-tab:hover {
+    background: #333;
+}
+
+#kofi-button {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 2100;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background: #111;
+    cursor: pointer;
+}
+
+#kofi-button:hover,
+#kofi-button:focus-visible {
+    background: #333;
+    outline: none;
+}
+
+#kofi-button img {
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+}
+
+#history-panel {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 280px;
+    max-width: 85vw;
+    background: #111;
+    border-right: 2px solid #fff;
+    z-index: 2200;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+}
+
+#history-panel.open {
+    transform: translateX(0);
+}
+
+.history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border-bottom: 2px solid #333;
+    background: #1a1a1a;
+}
+
+.history-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.history-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#history-all {
+    background: none;
+    border: 2px solid #fff;
+    color: #fff;
+    height: 28px;
+    padding: 0 10px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+}
+
+#history-all:hover {
+    background: #333;
+}
+
+#history-all.on {
+    background: #228b22;
+}
+
+#history-close {
+    background: none;
+    border: 2px solid #fff;
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+}
+
+#history-close:hover {
+    background: #333;
+}
+
+.history-new {
+    margin: 12px;
+    padding: 10px;
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.history-new:hover {
+    background: #333;
+}
+
+#chat-list {
+    list-style: none;
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 12px 12px 12px;
+}
+
+#chat-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat-list::-webkit-scrollbar-track {
+    background: #222;
+}
+
+#chat-list::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+#chat-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 8px;
+    margin-bottom: 6px;
+    border: 1px solid #333;
+    background: #1a1a1a;
+    cursor: pointer;
+    font-size: 14px;
+    color: #ddd;
+    word-break: break-word;
+}
+
+#chat-list li:hover {
+    background: #252525;
+}
+
+#chat-list li.active {
+    border-color: #fff;
+    background: #333;
+}
+
+.chat-delete {
+    flex-shrink: 0;
+    background: none;
+    border: 1px solid #555;
+    color: #aaa;
+    width: 22px;
+    height: 22px;
+    line-height: 1;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+}
+
+.chat-delete:hover {
+    color: #ff6666;
+    border-color: #ff6666;
+}
+
+#new-chat-button {
+    aspect-ratio: 1;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+    font-size: 16px;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+#new-chat-button:hover {
+    background-color: #333;
+}
+
+#show-history {
+    aspect-ratio: 1;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+    font-size: 16px;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+#show-history:hover {
+    background-color: #333;
+}
+
+#show-history.active {
+    background-color: #333;
+}
+
+#new-chat-button:active {
+    background-color: #555;
+}
+
+.chat-history {
+    width: 100%;
+    max-width: 800px;
+    height: 200px;
+    background-color: #111;
+    border: 2px solid #333;
+    padding: 15px;
+    margin-bottom: 20px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.chat-history::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-history::-webkit-scrollbar-track {
+    background: #222;
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+.chat-history::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 5px 0;
+}
+
+.chat-message.user {
+    color: #88ddff;
+}
+
+.chat-message.susie {
+    color: #dd88ff;
+}
+
+.chat-message.alphys {
+    color: #ffdd88;
+}
+
+.chat-message.ralsei {
+    color: #88ff88;
+}
+
+.chat-message.lancer {
+    color: #5588ff;
+}
+
+.chat-message.rouxls {
+    color: #4477cc;
+}
+
+.chat-message.noelle {
+    color: #ffdd99;
+}
+
+.chat-message.berdly {
+    color: #66ccff;
+}
+
+.chat-message.toby {
+    color: #ffffff;
+}
+
+.chat-message.spamton {
+    color: #ffff00;
+}
+
+.chat-message.queen {
+    color: #00ddff;
+}
+
+.chat-message.tenna {
+    color: #ff6600;
+}
+
+.chat-message.nubert {
+    color: #ff4444;
+}
+
+.chat-message.ramb {
+    color: #ffaa44;
+}
+
+.chat-message-sender {
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.portrait-container {
+    flex-shrink: 0;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#susie-portrait, #alphys-portrait, #toriel-portrait, #lancer-portrait, #rouxls-portrait, #noelle-portrait, #berdly-portrait, #toby-portrait, #spamton-portrait, #queen-portrait, #tenna-portrait, #nubert-portrait, #ramb-portrait, .dynamic-portrait {
+    max-width: 140px;
+    max-height: 140px;
+    width: auto;
+    height: 140px;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+    flex-shrink: 0;
+    object-fit: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: none;
+}
+
+/* PLUEY's portrait is a small pixel bust in the left slot. He is drawn at a
+   fixed pixel scale (capped so no expression makes him grow) and sits
+   bottom-center of the portrait area, keeping him always the same size. */
+#pluey-portrait {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    max-height: 256px;
+    max-width: 256px;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+    object-fit: contain;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scale(2);
+    transform-origin: 50% 100%;
+    top: auto;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+    transition: none;
+}
+
+#susie-portrait.hidden, #alphys-portrait.hidden, #toriel-portrait.hidden, #lancer-portrait.hidden, #rouxls-portrait.hidden, #noelle-portrait.hidden, #berdly-portrait.hidden, #toby-portrait.hidden, #spamton-portrait.hidden, #queen-portrait.hidden, #tenna-portrait.hidden, #nubert-portrait.hidden, #ramb-portrait.hidden, #pluey-portrait.hidden, .dynamic-portrait.hidden {
+    display: none !important;
+}
+
+.textbox-container {
+    flex: 1;
+    max-width: 920px;
+    display: flex;
+    justify-content: center;
+    width: 920px;
+}
+
+.textbox {
+    width: 920px;
+    height: 192px;
+    background-color: #000;
+    border: 4px solid #fff;
+    padding: 24px;
+    position: relative;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    transform-origin: center center;
+}
+
+.textbox-content {
+    position: relative;
+    height: 100%;
+    flex: 1;
+}
+
+/* PINK's portrait lives on the RIGHT side of the box, stands TALLER than the
+   dialogue box, and its bottom-right corner is anchored to the box's own
+   bottom-right corner so it pokes out over the top. The tail sits behind it. */
+.pink-overlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    pointer-events: none;
+    z-index: 3;
+}
+
+#pink-portrait {
+    height: 230px;
+    width: auto;
+    z-index: 4;
+}
+
+/* The tail is a full-body overlay pinned behind the portrait at the same
+   alignment; it wiggles frame to frame while Pink talks and rests otherwise. */
+#pink-tail {
+    bottom: 0;
+    right: 0;
+    height: 230px;
+    width: auto;
+    z-index: 2;
+}
+
+/* When Pink is speaking she fills the right edge, so pull the text away from
+   her side so she has "less space" and the type stays clear of her body. */
+.textbox.pink-active {
+    align-items: flex-end;
+}
+
+.textbox.pink-active .textbox-content {
+    padding-right: 170px;
+}
+
+.textbox.pink-active .portrait-container {
+    display: none;
+}
+
+.textbox.pink-active #advance-indicator,
+.textbox.pink-active #loading-gif {
+    left: 24px;
+    right: auto;
+}
+
+#dialogue-text {
+    font-size: 30px;
+    line-height: 1.6;
+    min-height: 144px;
+    white-space: pre-wrap;
+}
+
+.input-container {
+    padding: 0;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+    max-width: 920px;
+}
+
+#user-input {
+    flex: 1;
+    max-width: 500px;
+    padding: 10px;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+    font-size: 18px;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    outline: none;
+}
+
+#user-input:focus {
+    border-color: #ccc;
+}
+
+#send-button {
+    aspect-ratio: 1;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+    font-size: 22px;
+    line-height: 1;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+#send-button.hidden,
+#regenerate-button.hidden,
+#show-history.hidden,
+#new-chat-button.hidden {
+    display: none !important;
+}
+
+#send-button img {
+    width: 24px;
+    height: 24px;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+#send-button:hover {
+    background-color: #333;
+}
+
+#send-button:active {
+    background-color: #555;
+}
+
+.hidden,
+#warning-overlay.hidden {
+    display: none;
+}
+
+#warning-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 6000;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.warning-box {
+    width: 440px;
+    max-width: 90vw;
+    text-align: center;
+    border: 3px solid #f33;
+    padding: 22px 24px;
+    background: #000;
+    box-shadow: 0 0 24px rgba(255, 0, 0, 0.4);
+}
+
+.warning-title {
+    font-size: 30px;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+    color: #f33;
+    font-weight: bold;
+}
+
+.warning-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
+    margin-bottom: 22px;
+    text-align: left;
+}
+
+#warning-ok {
+    font-family: 'Undertale', 'Courier Prime', monospace;
+    font-size: 18px;
+    padding: 8px 32px;
+    border: 2px solid #fff;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+    letter-spacing: 2px;
+}
+
+#warning-ok:hover {
+    background: #fff;
+    color: #000;
+}
+
+#kofi-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 6100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.82);
+}
+
+#kofi-popup.hidden {
+    display: none;
+}
+
+.kofi-popup-card {
+    width: min(440px, 100%);
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+    border: 3px solid #fff;
+    background: #000;
+    box-shadow: 0 0 24px rgba(255, 255, 255, 0.16);
+}
+
+.kofi-popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-bottom: 2px solid #fff;
+}
+
+.kofi-popup-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+#kofi-close {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #fff;
+    background: #000;
+    color: #fff;
+    font: inherit;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+#kofi-close:hover,
+#kofi-close:focus-visible {
+    background: #fff;
+    color: #000;
+    outline: none;
+}
+
+#kofiframe {
+    display: block;
+    max-width: 100%;
+}
+
+.minitext {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 8px 12px;
+    max-width: 200px;
+    font-size: 14px;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transform: translateX(100%);
+    animation: slideInFromRight 0.3s ease-out forwards;
+    z-index: 10;
+}
+
+.minitext img {
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.minitext-text {
+    flex: 1;
+    word-wrap: break-word;
+}
+
+#loading-gif {
+    position: absolute;
+    right: 16px;
+    bottom: 12px;
+    width: 34px;
+    height: auto;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    z-index: 5;
+    pointer-events: none;
+}
+
+#loading-gif.hidden,
+#advance-indicator.hidden {
+    display: none !important;
+}
+
+#advance-indicator {
+    position: absolute;
+    right: 18px;
+    bottom: 10px;
+    width: 44px;
+    height: auto;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+    z-index: 5;
+    pointer-events: none;
+}
+
+#regenerate-button {
+    aspect-ratio: 1;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+    font-size: 26px;
+    line-height: 1;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+#regenerate-button img {
+    width: 24px;
+    height: 24px;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+#regenerate-button:hover {
+    background-color: #333;
+}
+
+#regenerate-button:active {
+    background-color: #555;
+}
+
+#regenerate-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#user-input:disabled,
+#send-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.dev-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: #222;
+    border: 2px solid #fff;
+    padding: 0;
+    z-index: 3002;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+    color: #fff;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.dev-header {
+    background-color: #333;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #fff;
+}
+
+.dev-header h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.dev-content {
+    padding: 15px;
+}
+
+.dev-section {
+    margin-bottom: 20px;
+}
+
+.dev-section h4 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.dev-button {
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 8px 12px;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.dev-button:hover {
+    background-color: #333;
+}
+
+.dev-button:active {
+    background-color: #555;
+}
+
+.dev-select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+    font-size: 12px;
+}
+
+.dev-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+    font-size: 12px;
+}
+
+.dev-input:focus {
+    outline: none;
+    border-color: #ccc;
+}
+
+.dev-slider {
+    width: 60%;
+    margin-right: 10px;
+}
+
+#pitch-value {
+    font-size: 12px;
+    color: #ccc;
+}
+
+.dev-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dev-panel::-webkit-scrollbar-track {
+    background: #333;
+}
+
+.dev-panel::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+.dev-panel::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+.world-dialogue-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3000;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+}
+
+.world-textbox {
+    width: 600px;
+    height: 150px;
+    background-color: #000;
+    border: 4px solid #fff;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+}
+
+.world-textbox-content {
+    font-size: 18px;
+    line-height: 1.4;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    white-space: pre-wrap;
+    overflow-y: auto;
+}
+
+#interactive-textbox-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3000;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+}
+
+#interactive-textbox-container .world-textbox {
+    width: 600px;
+    height: 100px;
+    background-color: #000;
+    border: 4px solid #fff;
+    padding: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#interactive-input {
+    width: 500px;
+    padding: 10px;
+    font-size: 18px;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    outline: none;
+}
+
+#interactive-input:focus {
+    border-color: #ccc;
+}
+
+/* Mobile responsiveness for world dialogue */
+@media (max-width: 768px) {
+    .world-textbox {
+        width: 400px;
+        height: 130px;
+        padding: 15px;
+    }
+    
+    .world-textbox-content {
+        font-size: 16px;
+    }
+}
+
+/* On-screen Z/X touch controls (touch / mobile devices only) */
+.touch-controls {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+    display: none;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 16px;
+    z-index: 2400;
+    pointer-events: none;
+    touch-action: manipulation;
+}
+
+.touch-btn {
+    pointer-events: auto;
+    width: 62px;
+    height: 62px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background: rgba(17, 17, 17, 0.85);
+    color: #fff;
+    font-family: 'Undertale', 'Courier Prime', monospace;
+    font-size: 26px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.touch-btn:active {
+    background: #555;
+}
+
+@media (pointer: coarse) {
+    .touch-controls {
+        display: flex;
+    }
+    .game-container {
+        padding-bottom: 110px;
+    }
+}
+
+/* In portrait (taller than wide), move the pull-tab up near the top of the screen. */
+@media (max-width: 768px) and (orientation: portrait) {
+    #history-tab {
+        top: 12px;
+        transform: none;
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    /* The full-size PC textbox is used on all screens; fitTextBox() scales it
+       down via transform when it would overflow, so we intentionally do NOT
+       restyle the textbox (or its portrait/dialogue-text) here. */
+    .dialogue-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    #user-input {
+        font-size: 15px;
+    }
+    
+    #send-button {
+        font-size: 20px;
+    }
+    
+    #regenerate-button {
+        font-size: 24px;
+    }
+}
