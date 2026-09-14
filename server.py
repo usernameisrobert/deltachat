@@ -273,6 +273,109 @@ class Handler(SimpleHTTPRequestHandler):
             self._send_error_json(str(e))
 
 
+# ---------- WSGI app (for gunicorn: `gunicorn server:app`) ----------
+
+
+def _read_wsgi_json(environ):
+    try:
+        length = int(environ.get("CONTENT_LENGTH") or 0)
+    except (TypeError, ValueError):
+        length = 0
+    if length <= 0:
+        return {}
+    raw = environ["wsgi.input"].read(length)
+    if not raw:
+        return {}
+    return json.loads(raw.decode("utf-8"))
+
+
+def _wsgi_json(start_response, obj, status=200):
+    body = json.dumps(obj).encode("utf-8")
+    start_response(
+        "%d %s" % (status, "OK" if status == 200 else "Error"),
+        [
+            ("Content-Type", "application/json"),
+            ("Content-Length", str(len(body))),
+        ],
+    )
+    return [body]
+
+
+def _wsgi_static(environ, start_response):
+    path = unquote(environ.get("PATH_INFO") or "/")
+    if path == "/":
+        path = "/index.html"
+    elif path.endswith("/"):
+        return _wsgi_json(start_response, {"error": "Not found"}, 404)
+    full = os.path.realpath(os.path.join(ROOT, path.lstrip("/")))
+    if full != ROOT and not full.startswith(ROOT + os.sep):
+        return _wsgi_json(start_response, {"error": "Not found"}, 404)
+    if not os.path.isfile(full):
+        return _wsgi_json(start_response, {"error": "Not found"}, 404)
+    ext = os.path.splitext(full)[1].lower()
+    ctype = CONTENT_TYPES.get(ext, "application/octet-stream")
+    with open(full, "rb") as fh:
+        body = fh.read()
+    start_response(
+        "200 OK",
+        [
+            ("Content-Type", ctype),
+            ("Content-Length", str(len(body))),
+        ],
+    )
+    if environ.get("REQUEST_METHOD") == "HEAD":
+        return [b""]
+    return [body]
+
+
+def app(environ, start_response):
+    path = unquote(environ.get("PATH_INFO") or "/")
+    method = environ.get("REQUEST_METHOD", "GET")
+    try:
+        if path == "/api/me" and method == "GET":
+            return _wsgi_json(start_response, LOCAL_USER)
+        if path == "/api/chats":
+            if method == "GET":
+                return _wsgi_json(start_response, list_chats())
+            if method == "POST":
+                chat = _read_wsgi_json(environ)
+                if not chat.get("id"):
+                    return _wsgi_json(start_response, {"error": "id is required"}, 400)
+                return _wsgi_json(start_response, save_chat(chat))
+        if path.startswith("/api/chats/") and method == "DELETE":
+            chat_id = unquote(path[len("/api/chats/"):])
+            try:
+                delete_chat(chat_id)
+            except ValueError as e:
+                return _wsgi_json(start_response, {"error": str(e)}, 400)
+            return _wsgi_json(start_response, {"ok": True})
+        if path == "/api/chat/completions" and method == "POST":
+            payload = _read_wsgi_json(environ)
+            messages = payload.get("messages")
+            if not isinstance(messages, list) or not messages:
+                return _wsgi_json(start_response, {"error": "messages is required"}, 400)
+            model = payload.get("model") or GROQ_MODEL
+            content = groq_chat_completions(messages, model, bool(payload.get("json")))
+            return _wsgi_json(start_response, {"content": content})
+        if path == "/api/imagegen" and method == "POST":
+            payload = _read_wsgi_json(environ)
+            prompt = payload.get("prompt")
+            if not prompt:
+                return _wsgi_json(start_response, {"error": "prompt is required"}, 400)
+            try:
+                url = groq_image_gen(prompt)
+            except Exception as e:
+                print("imagegen error:", e)
+                url = PLACEHOLDER_IMAGE
+            return _wsgi_json(start_response, {"url": url})
+        return _wsgi_static(environ, start_response)
+    except ValueError as e:
+        return _wsgi_json(start_response, {"error": str(e)}, 400)
+    except Exception as e:
+        print("app error:", e)
+        return _wsgi_json(start_response, {"error": str(e)}, 500)
+
+
 def main():
     os.makedirs(CHATS_DIR, exist_ok=True)
     if not GROQ_KEY:
