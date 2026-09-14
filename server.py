@@ -2,6 +2,7 @@
 import json
 import os
 import re
+import threading
 import time
 import urllib.error
 import urllib.request
@@ -14,7 +15,11 @@ CHATS_DIR = os.path.join(DATA_DIR, "chats")
 PORT = int(os.environ.get("PORT", "8080"))
 GROQ_KEY = os.environ.get("GROQ_KEY", "")
 GROQ_MODEL = "openai/gpt-oss-120b"
+GROQ_FALLBACK_MODEL = "openai/gpt-oss-20b"
 GROQ_URL = "https://api.groq.com/openai/v1"
+_groq_model = GROQ_MODEL
+_groq_failures = 0
+_groq_lock = threading.Lock()
 LOCAL_USER = {"id": "ketchupdev-local", "username": "ketchupdev", "avatar_url": ""}
 PLACEHOLDER_IMAGE = "/susnormal.png"
 
@@ -71,10 +76,26 @@ def groq_request(path, body):
 
 
 def groq_chat_completions(messages, json_mode):
-    body = {"model": GROQ_MODEL, "messages": messages}
+    global _groq_model, _groq_failures
+    with _groq_lock:
+        model = _groq_model
+    body = {"model": model, "messages": messages}
     if json_mode:
         body["response_format"] = {"type": "json_object"}
-    data = groq_request("/chat/completions", body)
+    try:
+        data = groq_request("/chat/completions", body)
+    except Exception as e:
+        if model == GROQ_MODEL:
+            with _groq_lock:
+                _groq_failures += 1
+                if _groq_failures >= 3:
+                    print("Switching model from %s to %s after %d consecutive failures: %s"
+                          % (GROQ_MODEL, GROQ_FALLBACK_MODEL, _groq_failures, e))
+                    _groq_model = GROQ_FALLBACK_MODEL
+                    _groq_failures = 0
+        raise
+    with _groq_lock:
+        _groq_failures = 0
     try:
         return data["choices"][0]["message"]["content"]
     except (KeyError, IndexError, TypeError):
