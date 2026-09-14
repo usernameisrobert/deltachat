@@ -55,11 +55,20 @@ def groq_request(path, body):
         headers={
             "Authorization": "Bearer " + GROQ_KEY,
             "Content-Type": "application/json",
+            "User-Agent": "deltachat-server/1.0",
         },
         method="POST",
     )
-    with urllib.request.urlopen(req, timeout=120) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+    try:
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        detail = ""
+        try:
+            detail = (e.read().decode("utf-8", "replace") or "")[:500]
+        except Exception:
+            pass
+        raise RuntimeError("Groq API returned HTTP %d: %s" % (e.code, detail))
 
 
 def groq_chat_completions(messages, model, json_mode):

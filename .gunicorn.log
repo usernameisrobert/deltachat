@@ -1,0 +1,11 @@
+[2026-09-14 08:46:15 -0500] [24569] [INFO] Starting gunicorn 26.2.0
+[2026-09-14 08:46:15 -0500] [24569] [INFO] Listening at: http://127.0.0.1:8081 (24569)
+[2026-09-14 08:46:15 -0500] [24569] [INFO] Using worker: sync
+[2026-09-14 08:46:15 -0500] [24571] [INFO] Booting worker with pid: 24571
+[2026-09-14 08:46:15 -0500] [24572] [INFO] Booting worker with pid: 24572
+[2026-09-14 08:46:15 -0500] [24569] [INFO] Control socket listening at /data/data/com.termux/files/home/.gunicorn/gunicorn.ctl
+[2026-09-14 08:53:13 -0500] [24572] [INFO] Worker exiting (pid: 24572)
+[2026-09-14 08:53:13 -0500] [24569] [INFO] Handling signal: term
+[2026-09-14 08:53:13 -0500] [24571] [INFO] Worker exiting (pid: 24571)
+[2026-09-14 08:53:13 -0500] [24569] [INFO] Worker (pid:24571) was sent SIGTERM!
+[2026-09-14 08:53:13 -0500] [24569] [INFO] Shutting down: Master
