@@ -1,0 +1,2 @@
+# DELTACHAT uses only the Python standard library - nothing to install.
+# Run the server with: python3 server.py
