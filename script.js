@@ -130,6 +130,7 @@ class SusieDialogue {
         this.turnState = 'idle'; // 'idle' | 'ai_running'
         this.pendingQueue = []; // Prefetched dialogue lines waiting to be shown
         this.prefetchDone = false; // Prefetcher has reached the Kris handoff
+        this.maxDialogueAhead = 2; // Max dialogue boxes the prefetcher buffers ahead
         this.generationSeq = 0; // Stale-loop guard for background generation
         this.interjectMessage = null; // Set when the player types mid-AI-turn to interrupt
 
@@ -1396,6 +1397,12 @@ Respond with JSON:
         try {
             while (consecutive < 20) {
                 if (gen !== this.generationSeq) return; // stale pass
+                // Backpressure: don't buffer more than a couple dialogue boxes
+                // ahead, so the API isn't overloaded with prefetched turns.
+                if (this.pendingQueue.length >= this.maxDialogueAhead) {
+                    await this.sleep(50);
+                    continue;
+                }
                 const decision = await this.withRetry(() => this.decideNextSpeaker());
 
                 if (decision.location) {
@@ -1412,6 +1419,7 @@ Respond with JSON:
                 if (gen !== this.generationSeq) return;
 
                 for (const line of lines) {
+                    if (this.pendingQueue.length >= this.maxDialogueAhead) break;
                     line.music = decision.music;
                     line.location = decision.location;
                     this.pendingQueue.push(line);
