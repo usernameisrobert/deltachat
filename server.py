@@ -13,8 +13,7 @@ DATA_DIR = os.path.join(ROOT, "localdata")
 CHATS_DIR = os.path.join(DATA_DIR, "chats")
 PORT = int(os.environ.get("PORT", "8080"))
 GROQ_KEY = os.environ.get("GROQ_KEY", "")
-GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
-GROQ_IMAGE_MODEL = os.environ.get("GROQ_IMAGE_MODEL", "black-forest-labs/flux-schnell")
+GROQ_MODEL = "openai/gpt-oss-120b"
 GROQ_URL = "https://api.groq.com/openai/v1"
 LOCAL_USER = {"id": "ketchupdev-local", "username": "ketchupdev", "avatar_url": ""}
 PLACEHOLDER_IMAGE = "/susnormal.png"
@@ -71,8 +70,8 @@ def groq_request(path, body):
         raise RuntimeError("Groq API returned HTTP %d: %s" % (e.code, detail))
 
 
-def groq_chat_completions(messages, model, json_mode):
-    body = {"model": model or GROQ_MODEL, "messages": messages}
+def groq_chat_completions(messages, json_mode):
+    body = {"model": GROQ_MODEL, "messages": messages}
     if json_mode:
         body["response_format"] = {"type": "json_object"}
     data = groq_request("/chat/completions", body)
@@ -80,36 +79,6 @@ def groq_chat_completions(messages, model, json_mode):
         return data["choices"][0]["message"]["content"]
     except (KeyError, IndexError, TypeError):
         raise RuntimeError("Unexpected Groq response: " + json.dumps(data)[:500])
-
-
-def groq_image_gen(prompt):
-    body = {
-        "model": GROQ_IMAGE_MODEL,
-        "input": prompt,
-        "max_output_tokens": 480,
-        "response_format": {"type": "image"},
-    }
-    data = groq_request("/responses", body)
-
-    def find_url(obj):
-        if isinstance(obj, dict):
-            for key, value in obj.items():
-                if key == "url" and isinstance(value, str) and value.startswith("http"):
-                    return value
-                found = find_url(value)
-                if found:
-                    return found
-        elif isinstance(obj, list):
-            for item in obj:
-                found = find_url(item)
-                if found:
-                    return found
-        return None
-
-    url = find_url(data)
-    if not url:
-        raise RuntimeError("No image URL in Groq response: " + json.dumps(data)[:500])
-    return url
 
 
 def load_chat(chat_id):
@@ -244,9 +213,7 @@ class Handler(SimpleHTTPRequestHandler):
             messages = payload.get("messages")
             if not isinstance(messages, list) or not messages:
                 raise ValueError("messages is required")
-            model = payload.get("model") or GROQ_MODEL
-            json_mode = bool(payload.get("json"))
-            content = groq_chat_completions(messages, model, json_mode)
+            content = groq_chat_completions(messages, bool(payload.get("json")))
             self._send_json({"content": content})
         except Exception as e:
             print("chat/completions error:", e)
@@ -258,12 +225,7 @@ class Handler(SimpleHTTPRequestHandler):
             prompt = payload.get("prompt")
             if not prompt:
                 raise ValueError("prompt is required")
-            try:
-                url = groq_image_gen(prompt)
-            except Exception as e:
-                print("imagegen error:", e)
-                url = PLACEHOLDER_IMAGE
-            self._send_json({"url": url})
+            self._send_json({"url": PLACEHOLDER_IMAGE})
         except Exception as e:
             print("imagegen error:", e)
             self._send_error_json(str(e))
@@ -363,20 +325,13 @@ def app(environ, start_response):
             messages = payload.get("messages")
             if not isinstance(messages, list) or not messages:
                 return _wsgi_json(start_response, {"error": "messages is required"}, 400)
-            model = payload.get("model") or GROQ_MODEL
-            content = groq_chat_completions(messages, model, bool(payload.get("json")))
+            content = groq_chat_completions(messages, bool(payload.get("json")))
             return _wsgi_json(start_response, {"content": content})
         if path == "/api/imagegen" and method == "POST":
             payload = _read_wsgi_json(environ)
-            prompt = payload.get("prompt")
-            if not prompt:
+            if not payload.get("prompt"):
                 return _wsgi_json(start_response, {"error": "prompt is required"}, 400)
-            try:
-                url = groq_image_gen(prompt)
-            except Exception as e:
-                print("imagegen error:", e)
-                url = PLACEHOLDER_IMAGE
-            return _wsgi_json(start_response, {"url": url})
+            return _wsgi_json(start_response, {"url": PLACEHOLDER_IMAGE})
         return _wsgi_static(environ, start_response)
     except ValueError as e:
         return _wsgi_json(start_response, {"error": str(e)}, 400)
