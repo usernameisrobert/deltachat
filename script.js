@@ -1,3 +1,43 @@
+// Canonical names of Flowery's pre-recorded voice clips (matched against the
+// snd_flowery_voiceclip_*.wav files). Used to seed the AI's choices and to
+// validate/normalize whatever it picks.
+const FLOWERY_VOICE_CLIPS = [
+    'all_according_to_all_according_to_plant', 'blingo_blizzard', 'calling_for_help',
+    'dont_you_like_serving_humans', 'flowers_blooms_in_your_heart', 'flowery', 'flowery2',
+    'forget_it', 'get_a_chance_1', 'get_a_chance_2', 'give_to_you', 'glue', 'go_home',
+    'goodbye', 'great_style', 'grown_like_a_turnip', 'hah', 'heh_it_s_my_jarona',
+    'hereicome', 'hereicomesanfrandisc', 'hereicomesanfrandisco_strong', 'hereicomesanfrandisco_weak',
+    'hey', 'hey_boys', 'heyguys', 'heyguysithinkifoundaglue', 'hey_raly', 'heytherelittleguy',
+    'hoo', 'huh', 'huhillshowyou', 'im_falling', 'im_only_trying_to_help_you',
+    'imsorryonceagainikeptaladyinwaiting', 'it', 'its_all_in_a_name', 'its_all_yours',
+    'itsme', 'itsmeflowery', 'its_so_human', 'jarona1', 'jarona2', 'jarona3', 'jarona4',
+    'kris', 'last_jarona', 'leaf_it_to_me', 'lend_me_your_power', 'minipeppers', 'mostlys',
+    'my_favorite_two', 'my_human', 'my_king', 'mysterious_wind', 'nonono',
+    'no_way_its_your_children', 'omega_flowery', 'powering_up', 'prism_blow', 'sanfran',
+    'say_that_again', 'smile_again', 'sorryaboutthatguys', 'sorryaboutthatlittleguy',
+    'sorryabouttheguy', 'sorrytokeepaladyinwaiting', 'sorrytokeepyouladies',
+    'sorrytokeepyouwaiting1', 'sorrytokeepyouwaiting2', 'spiral_dance', 'stingus',
+    'suckle_it_up', 'susie', 'take_that', 'thatsgreat', 'thats_my_dreams', 'the_boys',
+    'the_diner', 'theyre_eating_my_flesh', 'thisguysyourbestfriend', 'try_my_flavor',
+    'what_a_predictable_creature', 'with_your_powers_combined', 'wow', 'yes', 'your_dad',
+    'yourdadsmybestfriend', 'youre_a_hero'
+];
+const FLOWERY_VOICE_CLIP_SET = new Set(FLOWERY_VOICE_CLIPS);
+
+// Normalize an AI-chosen clip name against the known files. Exact (heavily
+// sanitized) names win first; otherwise the AI's loose phrasing is stripped to
+// letters+digits and matched without separators.
+function normalizeFloweryVoiceClip(input) {
+    if (typeof input !== 'string') return null;
+    const exact = input.toLowerCase().replace(/[^a-z0-9_]/g, '_').replace(/_+/g, '_').replace(/^_+|_+$/g, '');
+    if (FLOWERY_VOICE_CLIP_SET.has(exact)) return exact;
+    const compressed = exact.replace(/[^a-z0-9]/g, '');
+    for (const key of FLOWERY_VOICE_CLIPS) {
+        if (key.replace(/[^a-z0-9]/g, '') === compressed) return key;
+    }
+    return null;
+}
+
 class SusieDialogue {
     constructor() {
         this.dialogueText = document.getElementById('dialogue-text');
@@ -17,6 +57,7 @@ class SusieDialogue {
         this.pinkPortrait = document.getElementById('pink-portrait');
         this.pinkTail = document.getElementById('pink-tail');
         this.plueyPortrait = document.getElementById('pluey-portrait');
+        this.floweryPortrait = document.getElementById('flowery-portrait');
         this.userInput = document.getElementById('user-input');
         this.sendButton = document.getElementById('send-button');
         this.regenerateButton = document.getElementById('regenerate-button');
@@ -134,6 +175,12 @@ class SusieDialogue {
         this.generationSeq = 0; // Stale-loop guard for background generation
         this.interjectMessage = null; // Set when the player types mid-AI-turn to interrupt
 
+        // Flowery's voice clips: when enabled (and the AI picks a clip) he
+        // plays a recorded voice clip instead of per-letter voicenoise.
+        this.voiceClipsKey = 'deltarune_voice_clips_v1';
+        this.voiceClipsEnabled = localStorage.getItem(this.voiceClipsKey) !== 'off';
+        this.floweryVoicelinePlaying = false;
+
         // Chat persistence (database)
         this.CURRENT_KEY = 'deltarune_current_chat_v1';
         this.MAX_CONTEXT = 600; // Safety ceiling for transcript context
@@ -157,9 +204,9 @@ class SusieDialogue {
             'lancer': 'Lancer', 'rouxls': 'Rouxls Kaard', 'noelle': 'Noelle',
             'berdly': 'Berdly', 'toby': 'Toby Fox', 'spamton': 'Spamton',
             'queen': 'Queen', 'tenna': 'Tenna', 'nubert': 'Nubert', 'ramb': 'Ramb',
-            'pink': 'Pink', 'pluey': 'Pluey'
+            'pink': 'Pink', 'pluey': 'Pluey', 'flowery': 'Flowery'
         };
-        this.knownCharacters = ['susie', 'alphys', 'ralsei', 'lancer', 'rouxls', 'noelle', 'berdly', 'toby', 'spamton', 'queen', 'tenna', 'nubert', 'ramb', 'pink', 'pluey'];
+        this.knownCharacters = ['susie', 'alphys', 'ralsei', 'lancer', 'rouxls', 'noelle', 'berdly', 'toby', 'spamton', 'queen', 'tenna', 'nubert', 'ramb', 'pink', 'pluey', 'flowery'];
         
         // Per-character AI personas (each character gets its own AI voice)
         this.PERSONAS = {
@@ -234,6 +281,22 @@ EXAMPLES OF HIS VOICE (calibrate to this — do NOT quote verbatim):
 - "Pink's the loud one. I'm the soft one."
 
 Keep him in character always: gentle, brief, and reserved. He never monologues and never draws attention to himself.`,
+            flowery: `Flowery is a talking yellow flower — bright, cheery, and polite on the surface, with a warm sing-song way of talking and plenty of flowery garden talk ("my dear", "oh, that's lovely"). But underneath that sunbeam smile he is sharp, sly, and smug: he turns on a dime from saccharine to patronizing, loves petty jabs, gets dramatically offended when things don't go his way, and enjoys watching chaos unfold while acting innocent. He is NOT actively evil here — this is casual banter, so keep his malice playful and mostly beneath the surface; still, never let him be genuinely sweet for too long without a smirk breaking through. Refer to himself as a flower, loves the pun where your soul is "planted", and addresses [WORLD_NAME]'s hero with dripping affection.
+
+HIS VOICE & HOW HE TALKS:
+- Bubbly, chirpy, sing-song, with the politeness of someone enjoying being smug ("Oh my, oh myyyy.").
+- Sprinkles in garden terms constantly: "don't get prickly", "I'd never lead you astray", "rooted to the spot", "let's nip this in the bud".
+- Dramatic little gasps and clucks, delighted little "hm hm hm"s when things look bad for someone else.
+- Can shift chillingly deadpan with a big fake smile when annoyed. The strings of light-hearted menace must stay just under the surface.
+
+EXAMPLES OF HIS VOICE (calibrate to this — do NOT quote verbatim):
+- "Well, well, well! If it isn't my favorite human. Come to water little old me?"
+- "Oh geez, of course. Don't you worry your head about it — I'll handle everything. You just keep being you."
+- "Hm hm hm... why, I wouldn't dream of blaming you for that."
+- "Careful, careful. You wouldn't want to get your hands dirty, would you?"
+- "Ah, rules! So fun for everyone who isn't the one following them, wouldn't you say?"
+
+Keep him in character always: sunny on the outside, sly on the inside, never flat — the charm is the weapon.`,
         };
 
         // Per-character expression guidance
@@ -252,7 +315,8 @@ Keep him in character always: gentle, brief, and reserved. He never monologues a
             nubert: "Expressions: normal, happy, smile.",
             ramb: "Expressions: normal, scared, think, wink, wink2, drunk.",
             pink: "Expressions: normal, smile, wink, concern, nya, nyawink, angry, angryblush, cry, happycry, eyesclosed, eyeshalfclosed, gasp, gasphorror, overjoyed, sad, sadblush, tearfulhappy, shock, clutchhead. Prefer: normal, smile, nya, nyawink, wink, sad, overjoyed. (No talking suffix — the game opens/closes her mouth for you.)",
-            pluey: "Expressions: blushyarnball, dance, frowndance, exhausted, pretty, yarnball. Prefer: blushyarnball, dance, yarnball. He is quiet and reserved, so keep to calm poses; 'pretty' is his sparkly moment."
+            pluey: "Expressions: blushyarnball, dance, frowndance, exhausted, pretty, yarnball. Prefer: blushyarnball, dance, yarnball. He is quiet and reserved, so keep to calm poses; 'pretty' is his sparkly moment.",
+            flowery: "Expressions: normal (the cheery default — use often), notsmiling, smolsmile, nervous, question, worried, pity, determined, verynotsmiling. Match the sprite to the tone of the line: sweet sunbeam for normal/smolsmile, eyebrow-raising for question, flat for notsmiling/verynotsmiling."
         };
 
         this.initializeEventListeners();
@@ -352,6 +416,16 @@ Keep him in character always: gentle, brief, and reserved. He never monologues a
         this.historyNewBtn.addEventListener('click', () => this.newChat());
         this.historyAllBtn.addEventListener('click', () => this.toggleAllChats());
         this.newChatButton.addEventListener('click', () => this.newChat());
+
+        // Voice clips toggle (Flowery) lives in the left sidebar.
+        const voiceClipToggle = document.getElementById('voice-clips-toggle');
+        if (voiceClipToggle) {
+            voiceClipToggle.checked = this.voiceClipsEnabled;
+            voiceClipToggle.addEventListener('change', () => {
+                this.voiceClipsEnabled = voiceClipToggle.checked;
+                localStorage.setItem(this.voiceClipsKey, this.voiceClipsEnabled ? 'on' : 'off');
+            });
+        }
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') this.closeHistoryPanel();
         });
@@ -441,6 +515,7 @@ Keep him in character always: gentle, brief, and reserved. He never monologues a
                         <option value="ramb">Ramb</option>
                         <option value="pink">Pink</option>
                         <option value="pluey">Pluey</option>
+                        <option value="flowery">Flowery</option>
                     </select>
                     <input type="text" id="dialogue-input" class="dev-input" placeholder="Enter dialogue text..." maxlength="200">
                     <select id="expression-select" class="dev-select">
@@ -812,6 +887,7 @@ Keep him in character always: gentle, brief, and reserved. He never monologues a
         this.pinkPortrait.classList.add('hidden');
         this.pinkTail.classList.add('hidden');
         this.plueyPortrait.classList.add('hidden');
+        this.floweryPortrait.classList.add('hidden');
         this.stopPluey();
         this.textbox.classList.remove('pink-active');
         this.stopPinkTail();
@@ -1003,6 +1079,7 @@ Keep him in character always: gentle, brief, and reserved. He never monologues a
         }
         this.generationSeq++;
         this.interjectMessage = null;
+        this.stopFloweryVoiceClip();
         this.closeHistoryPanel();
         this.fadeOutBackgroundMusic();
         this.currentChatId = this.makeId();
@@ -1179,6 +1256,7 @@ Respond with JSON:
         // If a line is currently being typed out, finish showing it first so the
         // current dialogue box is fully committed before we take over.
         if (this.isTyping) this.skipTypewriter();
+        this.stopFloweryVoiceClip();
 
         this.lastUserMessage = text;
         this.userInput.value = '';
@@ -1576,7 +1654,16 @@ FONT RENDERING — never use em-dashes ("—"): the dialogue font renders an em-
 
         const expr = this.EXPRESSIONS[character] || '';
 
-        return `${shared}\n\n${persona}\n\n${expr}\n\nPAUSES: You may add short pause markers for dramatic timing. Type "&p" immediately followed by a number of frames: &p10 (~0.17s), &p20 (~0.33s), &p30 (~0.5s), &p40 (~0.67s). Use them sparingly but deliberately — after an ellipsis ("...&p30"), a heavy sigh, a stunned silence, or just before delivering a punchline. Never place a pause mid-word, and don't overuse them.\n\nRespond with JSON in this exact schema and nothing else: {"boxes": [{"text": string, "expression": string}, ...], "expression": string, "minitext": null or {"character": string, "text": string, "expression": string} for a brief 2-4 word aside from another character, using that character's expression list and a fitting expression for the aside.
+        // Flowery has pre-recorded voice clips for many trademark lines. When
+        // one genuinely matches, tag it onto the box so the game can play it.
+        let voice = '';
+        if (character === 'flowery') {
+            voice = `VOICE CLIPS — Flowery has pre-recorded voiced clips for many of his classic lines. In each box you may include a "voice" field naming ONE clip from this exact list when it fits what he says: ${FLOWERY_VOICE_CLIPS.join(', ')}.
+
+RULES: only use a clip when Flowery is saying that line (or something indistinguishable from it); otherwise OMIT "voice" (no empty string, just leave the field out). Prefer clips that sound right for the line over forcing one in, and never reuse the same clip twice in a row. Each box's "voice" is optional, and the game falls back to text sound when it's absent, so it is always safe to omit it.`;
+        }
+
+        return `${shared}\n\n${persona}\n\n${expr}${voice ? `\n\n${voice}` : ''}\n\nPAUSES: You may add short pause markers for dramatic timing. Type "&p" immediately followed by a number of frames: &p10 (~0.17s), &p20 (~0.33s), &p30 (~0.5s), &p40 (~0.67s). Use them sparingly but deliberately — after an ellipsis ("...&p30"), a heavy sigh, a stunned silence, or just before delivering a punchline. Never place a pause mid-word, and don't overuse them.\n\nRespond with JSON in this exact schema and nothing else: {"boxes": [{"text": string, "expression": string${character === 'flowery' ? ', "voice": (optional) one clip name from the list or omitted' : ''}}, ...], "expression": string, "minitext": null or {"character": string, "text": string, "expression": string} for a brief 2-4 word aside from another character, using that character's expression list and a fitting expression for the aside.
 
 The "boxes" array is the bulk of your line — fill it with as many boxes as your response needs (aim for 2-5 typically). Each box's "text" is a full sentence capped at ${boxCap} characters — lean toward using that full ${boxCap}-character limit so boxes are substantial, and never go over it in one box; split extra thought into the next box instead. Its "expression" sets a new portrait for that box. The top-level "expression" is used for the first box if boxes is empty.`;
     }
@@ -1648,10 +1735,15 @@ That is not allowed. Do NOT repeat that line or anything identical to it. Discar
                 throw new Error('Malformed character line: box.text missing or not a string');
             }
             const text = box.text;
+            let voiceclip = null;
+            if (character === 'flowery') {
+                voiceclip = normalizeFloweryVoiceClip(box.voice);
+            }
             const line = {
                 text: text,
                 character: character,
                 expression: box.expression || data.expression || 'normal',
+                voiceclip: voiceclip,
                 music: 'continue'
             };
             if (lines.length === 0) {
@@ -1797,6 +1889,11 @@ That is not allowed. Do NOT repeat that line or anything identical to it. Discar
         } else if (dialogue.character === 'pluey') {
             this.showPluey(dialogue.expression || 'blushyarnball');
             console.log(`Setting Pluey expression to: ${dialogue.expression} (${this.plueyActive})`);
+        } else if (dialogue.character === 'flowery') {
+            this.floweryPortrait.classList.remove('hidden');
+            const expressionImage = this.expressions.floweryExpressions[dialogue.expression] || this.expressions.floweryExpressions.normal;
+            this.floweryPortrait.src = expressionImage;
+            console.log(`Setting Flowery expression to: ${dialogue.expression} (${expressionImage})`);
         } else {
             // Dynamic character - create a new portrait element
             let dynamicPortrait = document.getElementById(`${dialogue.character}-portrait`);
@@ -1866,12 +1963,31 @@ That is not allowed. Do NOT repeat that line or anything identical to it. Discar
             this.rambPortrait.offsetHeight;
         } else if (dialogue.character === 'pluey') {
             this.plueyPortrait.offsetHeight;
+        } else if (dialogue.character === 'flowery') {
+            this.floweryPortrait.offsetHeight;
         }
         
         // Store minitext for later display
         this.pendingMinitext = dialogue.minitext;
-        
+
+        this.startFloweryVoiceClip(dialogue);
         this.typewriterEffect(dialogue.text, dialogue.character);
+    }
+
+    // If this Flowery line carries a recorded voice clip (and the player has
+    // voice clips enabled), fire it and flip the flag that switches the
+    // typewriter into silent fast mode while the clip is the line's sound.
+    startFloweryVoiceClip(dialogue) {
+        if (dialogue.character !== 'flowery') return;
+        if (!this.voiceClipsEnabled || !dialogue.voiceclip) return;
+        this.floweryVoicelinePlaying = true;
+        this.preloader.playFloweryVoiceClip(dialogue.voiceclip);
+    }
+
+    // Turns the typewriter back to its normal blip-sound mode. Called when a
+    // box finishes typing, on skip, and whenever a line is dismissed.
+    stopFloweryVoiceClip() {
+        this.floweryVoicelinePlaying = false;
     }
     
     displayMinitext(minitext) {
@@ -1926,6 +2042,9 @@ That is not allowed. Do NOT repeat that line or anything identical to it. Discar
         } else if (minitext.character === 'pluey') {
             const frames = this.expressions.plueyExpressions[minitext.expression] || this.expressions.plueyExpressions.blushyarnball;
             imgElement.src = frames[0];
+        } else if (minitext.character === 'flowery') {
+            const expressionImage = this.expressions.floweryExpressions[minitext.expression] || this.expressions.floweryExpressions.normal;
+            imgElement.src = expressionImage;
         } else {
             // Dynamic character
             const characterData = this.dynamicCharacters.get(minitext.character);
@@ -2069,6 +2188,11 @@ That is not allowed. Do NOT repeat that line or anything identical to it. Discar
         this.dialogueText.textContent = '* ';
         this.hideAdvanceIndicator();
 
+        // Flowery: while a recorded voice clip is playing, the text renders
+        // quickly and silently — the clip is the line's sound.
+        const floweryClipPlaying = character === 'flowery' && this.floweryVoicelinePlaying;
+        const clipCharDelay = 16;
+
         // Pink: her mouth flaps at 6fps while she types (handled by a timer,
         // not per-character), plus her sound.
         if (character === 'pink') {
@@ -2114,17 +2238,20 @@ That is not allowed. Do NOT repeat that line or anything identical to it. Discar
                         if (characterCount % 3 === 0) {
                             this.preloader.playCharacterSound(character);
                         }
+                    } else if (floweryClipPlaying) {
+                        // Recorded clip is the sound for this line — skip blips.
                     } else {
                         this.preloader.playCharacterSound(character);
                     }
                 }
                 
                 i++;
-                this.currentTypewriterTimeout = setTimeout(typeNextChar, this.typewriterSpeed);
+                this.currentTypewriterTimeout = setTimeout(typeNextChar, floweryClipPlaying ? clipCharDelay : this.typewriterSpeed);
             } else {
                 this.isTyping = false;
                 // Pink snaps her mouth shut when she stops speaking.
                 if (character === 'pink') this.stopPinkTalk();
+                this.stopFloweryVoiceClip();
                 this.showAdvanceIndicator();
                 // Display minitext after typing is complete
                 if (this.pendingMinitext) {
@@ -2150,6 +2277,7 @@ That is not allowed. Do NOT repeat that line or anything identical to it. Discar
         if (dialogue.character === 'pink') {
             this.stopPinkTalk();
         }
+        this.stopFloweryVoiceClip();
         this.showAdvanceIndicator();
 
         // Display minitext after skipping

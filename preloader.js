@@ -53,6 +53,14 @@ class AssetPreloader {
         this.tennaFiles = [];
         for (let i = 1; i <= 10; i++) this.tennaFiles.push(`/txtenna${i}.wav`);
 
+        // Flowery's per-letter "voicenoise" blips (cycled while he talks) and
+        // his one-shot voice clips, decoded on demand by name.
+        this.floweryNoiseFiles = [
+            '/snd_flowery_voicenoise_1.wav',
+            '/snd_flowery_voicenoise_2.wav',
+            '/snd_flowery_voicenoise_3.wav'
+        ];
+
         this.queenPitches = [0.97, 1.0, 1.03];
 
         // Browsers block audio until a user gesture. Resume the context on the
@@ -139,6 +147,13 @@ class AssetPreloader {
                 if (remaining <= 0) this.tennaAudioReady = true;
             });
         });
+
+        this.floweryNoiseFiles.forEach((url, idx) => {
+            this.fetchAndDecode(url, this.soundBuffers, this.soundPromises).then(decoded => {
+                if (!decoded) return;
+                this.soundBuffers.set('flowerynoise' + idx, decoded);
+            });
+        });
     }
 
     // Play a decoded buffer as a fresh source node. Each call creates its own
@@ -146,7 +161,7 @@ class AssetPreloader {
     // element could. A tiny lead time schedules the blip onto the audio clock
     // ahead of the JS timer so it lands on time even when the main thread is
     // busy or the device polls slowly.
-    playSound(name, { lead = 0.02, pitch = 1 } = {}) {
+    playSound(name, { lead = 0.02, pitch = 1, gain = 0.5 } = {}) {
         const ctx = this.getAudioContext();
         if (!ctx || ctx.state === 'suspended') return;
         const buf = this.soundBuffers.get(name);
@@ -155,10 +170,10 @@ class AssetPreloader {
             const src = ctx.createBufferSource();
             src.buffer = buf;
             src.playbackRate.value = pitch;
-            const gain = ctx.createGain();
-            gain.gain.value = 0.5;
-            src.connect(gain);
-            gain.connect(ctx.destination);
+            const gainNode = ctx.createGain();
+            gainNode.gain.value = gain;
+            src.connect(gainNode);
+            gainNode.connect(ctx.destination);
             src.start(ctx.currentTime + lead);
         } catch (e) {
             // Ignore audio errors
@@ -193,9 +208,30 @@ class AssetPreloader {
             this.playSound('ramb');
         } else if (character === 'pluey') {
             this.playSound('pluey');
+        } else if (character === 'flowery') {
+            const idx = Math.floor(Math.random() * this.floweryNoiseFiles.length);
+            this.playSound('flowerynoise' + idx);
         } else {
             this.playSound('dynamic');
         }
+    }
+
+    // Play a one-shot Flowery voice clip by canonical name. Clips are decoded
+    // from disk on first use, then cached. Unknown/empty names are ignored so
+    // the caller can safely pass any AI-chosen string.
+    playFloweryVoiceClip(name) {
+        if (!name) return;
+        const safe = String(name).toLowerCase().replace(/[^a-z0-9_]/g, '_').replace(/_+/g, '_').replace(/^_+|_+$/g, '');
+        if (!safe) return;
+        const key = 'floweryclip_' + safe;
+        const url = '/snd_flowery_voiceclip_' + safe + '.wav';
+        if (this.soundBuffers.has(key)) {
+            this.playSound(key, { gain: 0.7 });
+            return;
+        }
+        this.fetchAndDecode(url, this.soundBuffers, this.soundPromises).then(decoded => {
+            if (decoded) this.playSound(key, { gain: 0.7 });
+        });
     }
 
     playDialogueSound() {

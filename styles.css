@@ -246,6 +246,27 @@ body {
     background: #333;
 }
 
+.history-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    margin: 0 12px 8px 12px;
+    border: 1px solid #333;
+    background: #1a1a1a;
+    color: #ddd;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.history-toggle input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #ffcc00;
+    cursor: pointer;
+}
+
 #chat-list {
     list-style: none;
     flex: 1;
@@ -504,7 +525,30 @@ body {
     transition: none;
 }
 
-#susie-portrait.hidden, #alphys-portrait.hidden, #toriel-portrait.hidden, #lancer-portrait.hidden, #rouxls-portrait.hidden, #noelle-portrait.hidden, #berdly-portrait.hidden, #toby-portrait.hidden, #spamton-portrait.hidden, #queen-portrait.hidden, #tenna-portrait.hidden, #nubert-portrait.hidden, #ramb-portrait.hidden, #pluey-portrait.hidden, .dynamic-portrait.hidden {
+/* FLOWERY's portrait is a tall pixel sprite in the left slot. Like Pluey he is
+   drawn at a fixed pixel scale (capped so no expression makes him grow) and sits
+   bottom-center of the portrait area. */
+#flowery-portrait {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    max-height: 256px;
+    max-width: 256px;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+    object-fit: contain;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scale(2);
+    transform-origin: 50% 100%;
+    top: auto;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+    transition: none;
+}
+
+#susie-portrait.hidden, #alphys-portrait.hidden, #toriel-portrait.hidden, #lancer-portrait.hidden, #rouxls-portrait.hidden, #noelle-portrait.hidden, #berdly-portrait.hidden, #toby-portrait.hidden, #spamton-portrait.hidden, #queen-portrait.hidden, #tenna-portrait.hidden, #nubert-portrait.hidden, #ramb-portrait.hidden, #pluey-portrait.hidden, #flowery-portrait.hidden, .dynamic-portrait.hidden {
     display: none !important;
 }
 

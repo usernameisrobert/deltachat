@@ -297,6 +297,20 @@ class CharacterExpressions {
             '/pinktailf4.png', '/pinktailf5.png', '/pinktailf6.png'
         ];
         
+        // Flowery — the flower who shows up now and then. Nine sprites: a
+        // sunnily polite default plus the creeping/smirking/smiling range.
+        this.floweryExpressions = {
+            normal: '/flowerynormal.png',
+            notsmiling: '/flowerynotsmiling.png',
+            smolsmile: '/flowerysmolsmile.png',
+            nervous: '/flowerynervous.png',
+            question: '/floweryquestion.png',
+            worried: '/floweryworried.png',
+            pity: '/flowerypity.png',
+            determined: '/flowerydetermined.png',
+            verynotsmiling: '/floweryverynotsmiling.png'
+        };
+
         this.noelleExpressions = {
             normal: '/0_processed.png',
             happy: '/8_processed.png',
