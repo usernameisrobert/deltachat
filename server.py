@@ -17,6 +17,9 @@ GROQ_KEY = os.environ.get("GROQ_KEY", "")
 GROQ_MODEL = "openai/gpt-oss-120b"
 GROQ_FALLBACK_MODEL = "openai/gpt-oss-20b"
 GROQ_URL = "https://api.groq.com/openai/v1"
+OLD_HOST = "deltachat-65ne.onrender.com"
+NEW_HOST = "deltachat.work.gd"
+ORIGIN = "https://" + NEW_HOST
 _groq_model = GROQ_MODEL
 _groq_failures = 0
 _groq_lock = threading.Lock()
@@ -177,6 +180,20 @@ class Handler(SimpleHTTPRequestHandler):
             return {}
         return json.loads(raw.decode("utf-8"))
 
+    def _maybe_redirect_old_host(self):
+        # Mirror the WSGI redirect: any request that hits the old
+        # deltachat-65ne.onrender.com host bounces over to deltachat.work.gd.
+        if is_old_host(self.headers.get("Host") or ""):
+            qs = ""
+            if self.path and "?" in self.path:
+                qs = "?" + self.path.split("?", 1)[1]
+            self.send_response(301)
+            self.send_header("Location", ORIGIN + self.path.split("?", 1)[0] + qs)
+            self.send_header("Content-Length", "0")
+            self.end_headers()
+            return True
+        return False
+
     def _send_json(self, obj, status=200):
         body = json.dumps(obj).encode("utf-8")
         self.send_response(status)
@@ -189,6 +206,8 @@ class Handler(SimpleHTTPRequestHandler):
         self._send_json({"error": message}, status)
 
     def do_GET(self):
+        if self._maybe_redirect_old_host():
+            return
         parsed = urlparse(self.path)
         route = parsed.path
         if route == "/api/me":
@@ -200,6 +219,8 @@ class Handler(SimpleHTTPRequestHandler):
         super().do_GET()
 
     def do_POST(self):
+        if self._maybe_redirect_old_host():
+            return
         parsed = urlparse(self.path)
         route = parsed.path
         if route == "/api/chat/completions":
@@ -214,6 +235,8 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_error(404, "Not found")
 
     def do_DELETE(self):
+        if self._maybe_redirect_old_host():
+            return
         parsed = urlparse(self.path)
         route = parsed.path
         prefix = "/api/chats/"
@@ -293,6 +316,30 @@ def _wsgi_json(start_response, obj, status=200):
     return [body]
 
 
+def _wsgi_redirect(start_response, location):
+    start_response(
+        "301 Moved Permanently",
+        [
+            ("Location", location),
+            ("Content-Length", "0"),
+        ],
+    )
+    return [b""]
+
+
+def is_old_host(host):
+    return bool(host) and host.split(":")[0].strip().lower() == OLD_HOST
+
+
+def redirect_target(environ):
+    qs = environ.get("QUERY_STRING") or ""
+    path = unquote(environ.get("PATH_INFO") or "/")
+    target = ORIGIN + path
+    if qs:
+        target += "?" + qs
+    return target
+
+
 def _wsgi_static(environ, start_response):
     path = unquote(environ.get("PATH_INFO") or "/")
     if path == "/":
@@ -323,6 +370,11 @@ def _wsgi_static(environ, start_response):
 def app(environ, start_response):
     path = unquote(environ.get("PATH_INFO") or "/")
     method = environ.get("REQUEST_METHOD", "GET")
+    # The site moved to its own domain: permanently redirect the old
+    # deltachat-65ne.onrender.com hosts to deltachat.work.gd, preserving path
+    # and query so bookmarks and shared links keep working.
+    if is_old_host(environ.get("HTTP_HOST") or ""):
+        return _wsgi_redirect(start_response, redirect_target(environ))
     try:
         if path == "/api/me" and method == "GET":
             return _wsgi_json(start_response, LOCAL_USER)
