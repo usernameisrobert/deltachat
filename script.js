@@ -453,6 +453,9 @@ Keep him in character always: blindingly charming with a razor underneath — su
         window.addEventListener('resize', fit);
         window.addEventListener('orientationchange', fit);
         window.addEventListener('load', fit);
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', fit);
+        }
         // Re-run a few frames after init so fonts/CSS/media queries have settled.
         requestAnimationFrame(() => requestAnimationFrame(fit));
         setTimeout(fit, 100);
@@ -545,19 +548,18 @@ Keep him in character always: blindingly charming with a razor underneath — su
     }
     
     // Shrink the textbox (and its outline) down so the full-size box always
-    // fits the viewport. Never scales up beyond its natural size. Resets any
-    // previous scale before measuring so we always read the true layout size.
+    // fits the viewport. Never scales up beyond its natural size. The box is
+    // ALWAYS laid out at its design size (CSS never shrinks it), so we scale
+    // against those fixed dimensions rather than offsetWidth — reading the
+    // layout back is unreliable on small screens and can clamp the scale to 1.
     fitTextBox() {
         if (!this.textbox) return;
-        this.textbox.style.transform = 'none';
-        const bw = this.textbox.offsetWidth;
-        const bh = this.textbox.offsetHeight;
-        this.textbox.style.transform = '';
-        if (!bw || !bh) return;
+        const BW = 920;
+        const BH = 192;
         const w = window.innerWidth;
         const h = window.innerHeight;
-        const scale = Math.min(1, (w - 8) / bw, (h - 8) / bh);
-        this.textbox.style.transform = `scale(${scale})`;
+        const scale = Math.min(1, (w - 16) / BW, (h - 16) / BH);
+        this.textbox.style.transform = scale < 1 ? `scale(${scale})` : '';
     }
 
     handleDevKeyPress() {
