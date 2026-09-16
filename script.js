@@ -38,6 +38,109 @@ function normalizeFloweryVoiceClip(input) {
     return null;
 }
 
+const FLOWERY_AUTO_CLIPS = [
+    ["leaf it to me", "leaf_it_to_me"],
+    ["leave it to me", "leaf_it_to_me"],
+    ["what a predictable creature", "what_a_predictable_creature"],
+    ["don't you like serving humans", "dont_you_like_serving_humans"],
+    ["with your powers combined", "with_your_powers_combined"],
+    ["lend me your power", "lend_me_your_power"],
+    ["heh, it's my jarona", "heh_it_s_my_jarona"],
+    ["it's my jarona", "heh_it_s_my_jarona"],
+    ["jarona", "jarona1"],
+    ["i think i found a glue", "heyguysithinkifoundaglue"],
+    ["found a glue", "heyguysithinkifoundaglue"],
+    ["glue", "glue"],
+    ["the diner", "the_diner"],
+    ["this guy's your best friend", "thisguysyourbestfriend"],
+    ["your dad's my best friend", "yourdadsmybestfriend"],
+    ["your dad", "your_dad"],
+    ["you're a hero", "youre_a_hero"],
+    ["my human", "my_human"],
+    ["my king", "my_king"],
+    ["grown like a turnip", "grown_like_a_turnip"],
+    ["suckle it up", "suckle_it_up"],
+    ["it's all yours", "its_all_yours"],
+    ["all yours", "its_all_yours"],
+    ["it's so human", "its_so_human"],
+    ["it's all in a name", "its_all_in_a_name"],
+    ["all in a name", "its_all_in_a_name"],
+    ["my favorite two", "my_favorite_two"],
+    ["that's great", "thatsgreat"],
+    ["say that again", "say_that_again"],
+    ["smile again", "smile_again"],
+    ["try my flavor", "try_my_flavor"],
+    ["they're eating my flesh", "theyre_eating_my_flesh"],
+    ["no way, it's your children", "no_way_its_your_children"],
+    ["mysterious wind", "mysterious_wind"],
+    ["minipeppers", "minipeppers"],
+    ["mostlys", "mostlys"],
+    ["stingus", "stingus"],
+    ["san francisco", "hereicomesanfrandisco_strong"],
+    ["here i come", "hereicome"],
+    ["blingo blizzard", "blingo_blizzard"],
+    ["prism blow", "prism_blow"],
+    ["spiral dance", "spiral_dance"],
+    ["omega flowery", "omega_flowery"],
+    ["powering up", "powering_up"],
+    ["great style", "great_style"],
+    ["calling for help", "calling_for_help"],
+    ["i'm falling", "im_falling"],
+    ["i'm only trying to help", "im_only_trying_to_help_you"],
+    ["only trying to help", "im_only_trying_to_help_you"],
+    ["forget it", "forget_it"],
+    ["go home", "go_home"],
+    ["goodbye", "goodbye"],
+    ["hey, raly", "hey_raly"],
+    ["hey raly", "hey_raly"],
+    ["hey, boys", "hey_boys"],
+    ["hey boys", "hey_boys"],
+    ["the boys", "the_boys"],
+    ["hey there little guy", "heytherelittleguy"],
+    ["hey guys", "heyguys"],
+    ["what's my name", "its_all_in_a_name"],
+    ["howdy", "flowery"],
+    ["my name's flowery", "itsmeflowery"],
+    ["i'm flowery", "itsmeflowery"],
+    ["flowers bloom in your heart", "flowers_blooms_in_your_heart"],
+    ["bloom in your heart", "flowers_blooms_in_your_heart"],
+    ["all according to plan", "all_according_to_all_according_to_plant"],
+    ["all according to popplan", "all_according_to_all_according_to_plant"],
+    ["all according to", "all_according_to_all_according_to_plant"],
+    ["that's my dream", "thats_my_dreams"],
+    ["my dreams", "thats_my_dreams"],
+    ["take that", "take_that"],
+    ["i'll show you", "huhillshowyou"],
+    ["no no no", "nonono"],
+    ["sorry to keep a lady in waiting", "sorrytokeepaladyinwaiting"],
+    ["lady in waiting", "sorrytokeepaladyinwaiting"],
+    ["sorry to keep you ladies", "sorrytokeepyouladies"],
+    ["sorry to keep you waiting", "sorrytokeepyouwaiting1"],
+    ["sorry about that", "sorryabouttheguy"],
+    ["yes", "yes"],
+    ["wow", "wow"],
+    ["hoo", "hoo"],
+    ["huh", "huh"],
+    ["hey", "hey"],
+    ["kris", "kris"],
+    ["susie", "susie"],
+    ["heh", "hah"]
+];
+
+function autoMatchFloweryVoiceClip(text, exclude) {
+    if (typeof text !== 'string' || !text.trim()) return null;
+    const lower = ` ${text.toLowerCase()} `;
+    for (const [phrase, clip] of FLOWERY_AUTO_CLIPS) {
+        if (exclude.has(clip)) continue;
+        if (lower.includes(` ${phrase} `)) return clip;
+    }
+    for (const [phrase, clip] of FLOWERY_AUTO_CLIPS) {
+        if (exclude.has(clip)) continue;
+        if (lower.includes(phrase)) return clip;
+    }
+    return null;
+}
+
 class SusieDialogue {
     constructor() {
         this.dialogueText = document.getElementById('dialogue-text');
@@ -232,7 +335,9 @@ EXAMPLES OF HIS VOICE (match this tone — do NOT quote these verbatim, use them
 - "Susie, wait — I think Noelle was trying to tell us something. Let's hear her out first?"
 - "You two get along so well. Honestly, seeing everyone happy is all I could ever ask for."
 
-KEEP HIM IN CHARACTER ALWAYS: sweet but never saccharine or preachy, earnest but not naive, gentle but with real warmth and a quiet depth. He is never snarky, sarcastic, cold, or dismissive. He reacts to the scene genuinely — laughing at a joke, wincing when someone's hurt, cheering when a friend succeeds.`,
+SECRET HE KNOWS (keep subtle): Ralsei is one of the very few who knows this whole world is a game — he never says it directly, but he refers to SAVEs, chapters, and the player in guarded, mysterious ways. Flowery knows too, and Ralsei quietly DESPISES him for it. When Flowery winks at the camera, quotes mechanics, or breaks the fourth wall, Ralsei stiffens and goes briefly icy and brittle before gently steering everyone back in-universe. It is the ONE crack in his endless kindness — he stays cordial, but you can tell it grates on him.
+
+KEEP HIM IN CHARACTER ALWAYS: sweet but never saccharine or preachy, earnest but not naive, gentle but with real warmth and a quiet depth. He is never snarky, sarcastic, cold, or dismissive — with one single exception: Flowery's fourth-wall breaks make him quietly, visibly uncomfortable. He reacts to the scene genuinely — laughing at a joke, wincing when someone's hurt, cheering when a friend succeeds.`,
             lancer: "Lancer is an energetic, loyal, somewhat dim-witted spade prince who loves his bike and making friends. He's childish but well-meaning, often speaks in third person, and idolizes Susie.",
             rouxls: "Rouxls Kaard is a pompous, theatrical 'Duke of Puzzles' who speaks in exaggerated pseudo-Shakespearean fashion. He's actually quite incompetent despite grandiose claims, but enthusiastic and means well.",
             noelle: "Noelle is a shy, kind deer girl who is Kris's childhood friend. She's gentle, polite, often nervous, has a crush on Susie, and can cast ice magic. She's been through dark experiences and can be surprisingly strong when pushed.",
@@ -281,22 +386,30 @@ EXAMPLES OF HIS VOICE (calibrate to this — do NOT quote verbatim):
 - "Pink's the loud one. I'm the soft one."
 
 Keep him in character always: gentle, brief, and reserved. He never monologues and never draws attention to himself.`,
-            flowery: `Flowery is a talking yellow flower — bright, cheery, and polite on the surface, with a warm sing-song way of talking and plenty of flowery garden talk ("my dear", "oh, that's lovely"). But underneath that sunbeam smile he is sharp, sly, and smug: he turns on a dime from saccharine to patronizing, loves petty jabs, gets dramatically offended when things don't go his way, and enjoys watching chaos unfold while acting innocent. He is NOT actively evil here — this is casual banter, so keep his malice playful and mostly beneath the surface; still, never let him be genuinely sweet for too long without a smirk breaking through. Refer to himself as a flower, loves the pun where your soul is "planted", and addresses [WORLD_NAME]'s hero with dripping affection.
+            flowery: `Flowery is the golden flower of Flower Castle (Deltarune chapter 5) — Asgore's beloved companion and self-appointed lord of ceremonies. He radiates sunshine: smooth, flirty, theatrical, endlessly punny, with tumblr-sexyman good looks and he knows it. But he is NOT a cute gag: he is vain, wickedly clever, and quietly obsessive. Everything he does, he insists, is FOR ASGORE — he is building his King a perfect ideal world where every kindness is repaid, and he will cheerfully charm, manipulate, or monologue anyone into helping him build it.
 
 HIS VOICE & HOW HE TALKS:
-- Bubbly, chirpy, sing-song, with the politeness of someone enjoying being smug ("Oh my, oh myyyy.").
-- Sprinkles in garden terms constantly: "don't get prickly", "I'd never lead you astray", "rooted to the spot", "let's nip this in the bud".
-- Dramatic little gasps and clucks, delighted little "hm hm hm"s when things look bad for someone else.
-- Can shift chillingly deadpan with a big fake smile when annoyed. The strings of light-hearted menace must stay just under the surface.
+- Warm, sing-song, theatrical. He performs constantly: big entrances and exits ("Adieu, my friends!"), dramatic poses, hair-flips, and a bow when he wants something.
+- RELENTLESS GARDEN WORDPLAY — a pun in almost every other line: "leaf it to me", "nip this in the bud", "don't get prickly", "a twist of the stem", "flowers will bloom", "grown like a turnip", "suckle it up", "it's all in a name", "fruitfully yours". He cannot resist a good one.
+- Pet names for everyone: "my King", "princess", "my friends", "oldbuddy", "champ", "the boys" — and for Ralsei especially "Raly" or "Raly-poo": teasing, condescending fondness that never stops.
+- Flirty and suave. He dishes out outrageous compliments, winks, lets a "too handsome for his own good" comment slip about himself, and plays innocent the second he's called on it. When maneuvered into real sincerity he waves it off: "Ha! We'll, uhh... that's enough of that. Ta-ta!"
+- Dramatic and catty when annoyed: gasped theatrics, fake tears, wounded dignity — then a razor-smooth whisper of menace ("Heh... what a predictable creature").
+- Vain, proudly: happy to discuss his long legs, shining smile, perfect figure, his battle moves (Sanfrandisco! Spiral Dance! Prism Blow!), his dreams, and his Flowery Dollars.
+
+WHAT HE WANTS & HIS EDGE:
+- Obsessive devotion to Asgore: his happiness, his ideal world, his perfect family. Flowery's heart is stubbornly, suspiciously full of him; he needs the dream to be real ("That's my dream, too."). He is secretly so lonely that he turned love into a mission.
+- Charm is his weapon, but it's not fake: he genuinely wants everyone happy — he just refuses to let that spoil his mischief.
+- FOURTH WALL: Flowery knows this is a game and says so. He winks at the player, references mechanics, save files, and the chat itself, and delights in it — especially because Ralsei, the only other one who knows, hates it.
 
 EXAMPLES OF HIS VOICE (calibrate to this — do NOT quote verbatim):
-- "Well, well, well! If it isn't my favorite human. Come to water little old me?"
-- "Oh geez, of course. Don't you worry your head about it — I'll handle everything. You just keep being you."
-- "Hm hm hm... why, I wouldn't dream of blaming you for that."
-- "Careful, careful. You wouldn't want to get your hands dirty, would you?"
-- "Ah, rules! So fun for everyone who isn't the one following them, wouldn't you say?"
+- "You again! Oooh, don't you worry your petaled little head — before me, everything's in bloom. Leaf it to me."
+- "Kingy~! I saved you a seat. The world will be just how you always dreamed it, my King. That's my dream, too."
+- "Aw, Raly-poo~! Don't pout. It's endearing, and I said so now, so it can't be helping your case. Heh heh."
+- "Hm hm hm... heh. What a predictable creature. But we WERE just getting to the good part, weren't we...?"
+- "An ideal world, a cherry pie, a family that never has to ache again. Shall we scheme, my friends? With your powers combined—!"
+- "Oh, sorry, sorry — didn't mean to keep a princess in waiting. Anyway, as I was saying... howdy!"
 
-Keep him in character always: sunny on the outside, sly on the inside, never flat — the charm is the weapon.`,
+Keep him in character always: blindingly charming with a razor underneath — sunny, sly, flirty, vain, theatrical, and dizzyingly hopeful about the world he wants to build for his King. He should feel like the life of the party with a halo of menace and a core of genuine, obsessive love. Never flat, never a generic nice guy, and never actually evil at heart.`,
         };
 
         // Per-character expression guidance
@@ -1658,9 +1771,9 @@ FONT RENDERING — never use em-dashes ("—"): the dialogue font renders an em-
         // one genuinely matches, tag it onto the box so the game can play it.
         let voice = '';
         if (character === 'flowery') {
-            voice = `VOICE CLIPS — Flowery has pre-recorded voiced clips for many of his classic lines. In each box you may include a "voice" field naming ONE clip from this exact list when it fits what he says: ${FLOWERY_VOICE_CLIPS.join(', ')}.
+            voice = `VOICE CLIPS — Flowery has pre-recorded voiced clips for MANY of his classic lines, and he uses them generously. In EACH box, include a "voice" field naming ONE clip from this exact list: ${FLOWERY_VOICE_CLIPS.join(', ')}.
 
-RULES: only use a clip when Flowery is saying that line (or something indistinguishable from it); otherwise OMIT "voice" (no empty string, just leave the field out). Prefer clips that sound right for the line over forcing one in, and never reuse the same clip twice in a row. Each box's "voice" is optional, and the game falls back to text sound when it's absent, so it is always safe to omit it.`;
+RULES: pick the clip that best fits the box's text or its closest catchphrase (e.g. "jarona" lines use a jarona clip, "leaf it to me" uses leaf_it_to_me, "what a predictable creature" uses that taunt, "with your powers combined" uses with_your_powers_combined). A near-fit is fine — when in doubt, ATTACH a clip; the game even auto-matches other lines for you. Only OMIT "voice" if literally nothing fits (no empty string — just leave the field out). Never reuse the same clip twice in a row.`;
         }
 
         return `${shared}\n\n${persona}\n\n${expr}${voice ? `\n\n${voice}` : ''}\n\nPAUSES: You may add short pause markers for dramatic timing. Type "&p" immediately followed by a number of frames: &p10 (~0.17s), &p20 (~0.33s), &p30 (~0.5s), &p40 (~0.67s). Use them sparingly but deliberately — after an ellipsis ("...&p30"), a heavy sigh, a stunned silence, or just before delivering a punchline. Never place a pause mid-word, and don't overuse them.\n\nRespond with JSON in this exact schema and nothing else: {"boxes": [{"text": string, "expression": string${character === 'flowery' ? ', "voice": (optional) one clip name from the list or omitted' : ''}}, ...], "expression": string, "minitext": null or {"character": string, "text": string, "expression": string} for a brief 2-4 word aside from another character, using that character's expression list and a fitting expression for the aside.
@@ -1730,6 +1843,7 @@ That is not allowed. Do NOT repeat that line or anything identical to it. Discar
             : [{ text: data.text, expression: data.expression || 'normal' }];
 
         const lines = [];
+        const usedClips = new Set(this._lastFloweryClipPlayed ? [this._lastFloweryClipPlayed] : []);
         for (const box of rawBoxes) {
             if (typeof box.text !== 'string' || !box.text.trim()) {
                 throw new Error('Malformed character line: box.text missing or not a string');
@@ -1738,6 +1852,10 @@ That is not allowed. Do NOT repeat that line or anything identical to it. Discar
             let voiceclip = null;
             if (character === 'flowery') {
                 voiceclip = normalizeFloweryVoiceClip(box.voice);
+                if (!voiceclip) {
+                    voiceclip = autoMatchFloweryVoiceClip(text, usedClips);
+                }
+                if (voiceclip) usedClips.add(voiceclip);
             }
             const line = {
                 text: text,
@@ -1981,6 +2099,7 @@ That is not allowed. Do NOT repeat that line or anything identical to it. Discar
         if (dialogue.character !== 'flowery') return;
         if (!this.voiceClipsEnabled || !dialogue.voiceclip) return;
         this.floweryVoicelinePlaying = true;
+        this._lastFloweryClipPlayed = dialogue.voiceclip;
         this.preloader.playFloweryVoiceClip(dialogue.voiceclip);
     }
 
@@ -2238,8 +2357,12 @@ That is not allowed. Do NOT repeat that line or anything identical to it. Discar
                         if (characterCount % 3 === 0) {
                             this.preloader.playCharacterSound(character);
                         }
-                    } else if (floweryClipPlaying) {
-                        // Recorded clip is the sound for this line — skip blips.
+                    } else if (character === 'flowery') {
+                        // Flowery plays one sound per three letters (Tenna's
+                        // rule) — unless a recorded voice clip is the sound.
+                        if (!floweryClipPlaying && characterCount % 3 === 0) {
+                            this.preloader.playCharacterSound(character);
+                        }
                     } else {
                         this.preloader.playCharacterSound(character);
                     }
