@@ -230,7 +230,11 @@ class AssetPreloader {
             return;
         }
         this.fetchAndDecode(url, this.soundBuffers, this.soundPromises).then(decoded => {
-            if (decoded) this.playSound(key, { gain: 0.7 });
+            if (!decoded) return;
+            // fetchAndDecode caches under the URL; re-key under our clip name
+            // so playSound() below (and every later call) hits the cache.
+            this.soundBuffers.set(key, decoded);
+            this.playSound(key, { gain: 0.7 });
         });
     }
 
