@@ -565,7 +565,7 @@ body {
 
 .textbox-container {
     flex: 0 0 auto;
-    max-width: 920px;
+    max-width: 100%;
     display: flex;
     justify-content: center;
     width: 920px;
