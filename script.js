@@ -558,7 +558,7 @@ Keep him in character always: blindingly charming with a razor underneath — su
         const BH = 192;
         const w = window.innerWidth;
         const h = window.innerHeight;
-        const scale = Math.min(1, (w - 16) / BW, (h - 16) / BH);
+        const scale = Math.min(1, (w - 24) / BW, (h - 24) / BH);
         this.textbox.style.transform = scale < 1 ? `scale(${scale})` : '';
     }
 
