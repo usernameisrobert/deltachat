@@ -10,7 +10,7 @@
     <meta property="og:image" content="https://deltachat.work.gd/logobig.png">
     <meta property="og:url" content="https://deltachat.work.gd/">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="styles.css?v=6">
+    <link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
     <div id="boot-screen">
@@ -22,9 +22,15 @@
         </div>
     </div>
     <button id="history-tab" title="Chat History">☰</button>
-    <button id="kofi-button" type="button" title="Support on Ko-fi" aria-label="Support on Ko-fi" aria-haspopup="dialog" aria-controls="kofi-popup">
+    <button id="kofi-button" class="corner-button" type="button" title="Support on Ko-fi" aria-label="Support on Ko-fi" aria-haspopup="dialog" aria-controls="kofi-popup">
         <img src="uploads/KOFI.png" alt="">
     </button>
+    <a id="discord-button" class="corner-button" href="https://discord.gg/WeZNkrQTNy" target="_blank" rel="noopener noreferrer" title="Join the Discord" aria-label="Join the Discord">
+        <img src="uploads/DISCORD.png" alt="">
+    </a>
+    <a id="github-button" class="corner-button" href="https://github.com/usernameisrobert/deltachat" target="_blank" rel="noopener noreferrer" title="View the source on GitHub" aria-label="View the source on GitHub">
+        <img src="uploads/GITHUB.png" alt="">
+    </a>
     <aside id="history-panel">
         <div class="history-header">
             <span class="history-title" id="history-title">Chats</span>
@@ -401,7 +407,7 @@
     <script src="preloader.js"></script>
     <script src="expressions.js"></script>
     <script src="worldmode.js"></script>
-    <script type="module" src="script.js?v=6"></script>
+    <script type="module" src="script.js?v=7"></script>
     <script type="module" src="kofi.js"></script>
 </body>
 </html>

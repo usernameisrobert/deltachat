@@ -129,10 +129,9 @@ body {
     background: #333;
 }
 
-#kofi-button {
+.corner-button {
     position: fixed;
     top: 14px;
-    right: 14px;
     z-index: 2100;
     width: 44px;
     height: 44px;
@@ -142,15 +141,29 @@ body {
     border-radius: 5px;
     background: #111;
     cursor: pointer;
+    padding: 0;
+    text-decoration: none;
 }
 
-#kofi-button:hover,
-#kofi-button:focus-visible {
+#kofi-button {
+    right: 14px;
+}
+
+#discord-button {
+    right: 68px;
+}
+
+#github-button {
+    right: 122px;
+}
+
+.corner-button:hover,
+.corner-button:focus-visible {
     background: #333;
     outline: none;
 }
 
-#kofi-button img {
+.corner-button img {
     width: 32px;
     height: 32px;
     image-rendering: pixelated;
