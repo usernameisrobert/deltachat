@@ -607,6 +607,10 @@ Keep him in character always: blindingly charming with a razor underneath — su
         }
         const payload = {
             href: location.href,
+            ua: navigator.userAgent,
+            ready: document.readyState,
+            fontStatus: document.fonts ? document.fonts.status : 'na',
+            bodyBG: getComputedStyle(document.body).backgroundColor,
             iw: window.innerWidth,
             ih: window.innerHeight,
             dpr: window.devicePixelRatio,
