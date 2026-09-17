@@ -560,6 +560,34 @@ Keep him in character always: blindingly charming with a razor underneath — su
         const h = window.innerHeight;
         const scale = Math.min(1, (w - 24) / BW, (h - 24) / BH);
         this.textbox.style.transform = scale < 1 ? `scale(${scale})` : '';
+        if (location.search.indexOf('diag') !== -1) this._diagReport(scale, BW, BH);
+    }
+
+    _diagReport(scale, BW, BH) {
+        const rect = (el) => {
+            if (!el) return 'null';
+            const r = el.getBoundingClientRect();
+            return [r.x, r.y, r.width, r.height].map((n) => Math.round(n)).join(',');
+        };
+        const cs = getComputedStyle(this.textbox);
+        document.title = [
+            'DIAG',
+            'iw=' + window.innerWidth,
+            'ih=' + window.innerHeight,
+            'dpr=' + window.devicePixelRatio,
+            'vv=' + (window.visualViewport ? Math.round(window.visualViewport.width) + 'x' + Math.round(window.visualViewport.height) : 'na'),
+            'scale=' + scale.toFixed(4),
+            'tbRect=' + rect(this.textbox),
+            'tbOff=' + this.textbox.offsetWidth + 'x' + this.textbox.offsetHeight,
+            'tbCSS=' + cs.width + 'x' + cs.height,
+            'flexShrink=' + cs.flexShrink,
+            'contRect=' + rect(this.textbox.parentElement),
+            'contCSS=' + getComputedStyle(this.textbox.parentElement).width,
+            'dlgRect=' + rect(this.dialogueContainer),
+            'gameRect=' + rect(document.querySelector('.game-container')),
+            'chatRect=' + rect(this.chatHistory),
+            'bodyScroll=' + document.body.scrollWidth + 'x' + document.body.scrollHeight,
+        ].join('|');
     }
 
     handleDevKeyPress() {
