@@ -565,29 +565,37 @@ Keep him in character always: blindingly charming with a razor underneath — su
 
     _diagReport(scale, BW, BH) {
         const rect = (el) => {
-            if (!el) return 'null';
+            if (!el) return null;
             const r = el.getBoundingClientRect();
-            return [r.x, r.y, r.width, r.height].map((n) => Math.round(n)).join(',');
+            return [r.x, r.y, r.width, r.height].map((n) => Math.round(n));
         };
-        const cs = getComputedStyle(this.textbox);
-        document.title = [
-            'DIAG',
-            'iw=' + window.innerWidth,
-            'ih=' + window.innerHeight,
-            'dpr=' + window.devicePixelRatio,
-            'vv=' + (window.visualViewport ? Math.round(window.visualViewport.width) + 'x' + Math.round(window.visualViewport.height) : 'na'),
-            'scale=' + scale.toFixed(4),
-            'tbRect=' + rect(this.textbox),
-            'tbOff=' + this.textbox.offsetWidth + 'x' + this.textbox.offsetHeight,
-            'tbCSS=' + cs.width + 'x' + cs.height,
-            'flexShrink=' + cs.flexShrink,
-            'contRect=' + rect(this.textbox.parentElement),
-            'contCSS=' + getComputedStyle(this.textbox.parentElement).width,
-            'dlgRect=' + rect(this.dialogueContainer),
-            'gameRect=' + rect(document.querySelector('.game-container')),
-            'chatRect=' + rect(this.chatHistory),
-            'bodyScroll=' + document.body.scrollWidth + 'x' + document.body.scrollHeight,
-        ].join('|');
+        const cont = this.textbox.parentElement;
+        const payload = {
+            iw: window.innerWidth,
+            ih: window.innerHeight,
+            dpr: window.devicePixelRatio,
+            vv: window.visualViewport ? [Math.round(window.visualViewport.width), Math.round(window.visualViewport.height)] : null,
+            scale: +scale.toFixed(4),
+            tbRect: rect(this.textbox),
+            tbOffset: [this.textbox.offsetWidth, this.textbox.offsetHeight],
+            tbCSS: [getComputedStyle(this.textbox).width, getComputedStyle(this.textbox).height],
+            flexShrink: getComputedStyle(this.textbox).flexShrink,
+            contRect: rect(cont),
+            contCSS: getComputedStyle(cont).width,
+            dlgRect: rect(this.dialogueContainer),
+            gameRect: rect(document.querySelector('.game-container')),
+            chatRect: rect(this.chatHistory),
+            bodyScroll: [document.body.scrollWidth, document.body.scrollHeight],
+            innerHTML: this.textbox.innerHTML.length,
+        };
+        document.title = 'DIAG ' + JSON.stringify(payload);
+        try {
+            fetch('/api/diag', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            }).catch(() => {});
+        } catch (e) {}
     }
 
     handleDevKeyPress() {
