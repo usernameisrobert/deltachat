@@ -570,23 +570,57 @@ Keep him in character always: blindingly charming with a razor underneath — su
             return [r.x, r.y, r.width, r.height].map((n) => Math.round(n));
         };
         const cont = this.textbox.parentElement;
+        const cs = getComputedStyle(this.textbox);
+        const pick = (el) => {
+            if (!el) return null;
+            const s = getComputedStyle(el);
+            return {
+                cls: el.className && el.className.toString ? el.className.toString().slice(0, 60) : '',
+                disp: s.display, w: s.width, h: s.height,
+                flexDir: s.flexDirection, align: s.alignItems, justify: s.justifyContent,
+                flex: s.flex, shrink: s.flexShrink, basis: s.flexBasis,
+                maxW: s.maxWidth, maxH: s.maxHeight, box: s.boxSizing,
+            };
+        };
+        const rules = [];
+        try {
+            for (const sheet of document.styleSheets) {
+                let list;
+                try { list = sheet.cssRules; } catch (e) { rules.push('SHEET_ERR:' + (sheet.href || 'inline')); continue; }
+                const walk = (rs, prefix) => {
+                    for (const r of rs) {
+                        if (r.cssRules) { walk(r.cssRules, prefix + (r.conditionText || r.media ? r.conditionText || r.media.mediaText : '') + ' >> '); continue; }
+                        if (r.selectorText && /\.textbox\b/.test(r.selectorText)) {
+                            rules.push(prefix + r.selectorText + ' { ' + r.style.cssText.slice(0, 160) + ' }');
+                        }
+                    }
+                };
+                walk(list, '');
+            }
+        } catch (e) { rules.push('ERR:' + e.message); }
         const payload = {
+            href: location.href,
             iw: window.innerWidth,
             ih: window.innerHeight,
             dpr: window.devicePixelRatio,
             vv: window.visualViewport ? [Math.round(window.visualViewport.width), Math.round(window.visualViewport.height)] : null,
+            mq768: window.matchMedia('(max-width: 768px)').matches,
+            mqCoarse: window.matchMedia('(pointer: coarse)').matches,
             scale: +scale.toFixed(4),
             tbRect: rect(this.textbox),
             tbOffset: [this.textbox.offsetWidth, this.textbox.offsetHeight],
-            tbCSS: [getComputedStyle(this.textbox).width, getComputedStyle(this.textbox).height],
-            flexShrink: getComputedStyle(this.textbox).flexShrink,
-            contRect: rect(cont),
-            contCSS: getComputedStyle(cont).width,
-            dlgRect: rect(this.dialogueContainer),
-            gameRect: rect(document.querySelector('.game-container')),
-            chatRect: rect(this.chatHistory),
+            tbCSS: [cs.width, cs.height, cs.borderTopWidth, cs.backgroundColor, cs.flexShrink, cs.display],
+            tbCount: document.querySelectorAll('.textbox').length,
+            tbHTML: this.textbox.outerHTML.slice(0, 120),
+            textbox: pick(this.textbox),
+            container: pick(cont),
+            dialogue: pick(this.dialogueContainer),
+            game: pick(document.querySelector('.game-container')),
+            body: pick(document.body),
+            html: pick(document.documentElement),
             bodyScroll: [document.body.scrollWidth, document.body.scrollHeight],
-            innerHTML: this.textbox.innerHTML.length,
+            sheets: [...document.styleSheets].map((s) => (s.href || 'inline') + ':' + (s.cssRules ? s.cssRules.length : 'X')),
+            textboxRules: rules.slice(0, 25),
         };
         document.title = 'DIAG ' + JSON.stringify(payload);
         try {
