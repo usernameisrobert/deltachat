@@ -6,6 +6,7 @@ import threading
 import time
 import urllib.error
 import urllib.request
+import email.utils
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, unquote
 
@@ -166,6 +167,17 @@ class Handler(SimpleHTTPRequestHandler):
 
     def log_message(self, fmt, *args):
         print("[%s] %s" % (self.log_date_time_string(), fmt % args))
+
+    def end_headers(self):
+        # Keep local dev in sync with the WSGI handler: never let a browser
+        # hold on to stale HTML/CSS/JS, but allow versioned assets to be cached.
+        parsed = urlparse(self.path)
+        path = parsed.path
+        if path.endswith((".css", ".js")) and "v=" in parsed.query:
+            self.send_header("Cache-Control", "public, max-age=31536000, immutable")
+        elif path.endswith("/") or path.endswith((".html", ".htm", ".css", ".js")):
+            self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+        super().end_headers()
 
     def list_directory(self, path):
         self.send_error(404, "Not found")
@@ -353,15 +365,44 @@ def _wsgi_static(environ, start_response):
         return _wsgi_json(start_response, {"error": "Not found"}, 404)
     ext = os.path.splitext(full)[1].lower()
     ctype = CONTENT_TYPES.get(ext, "application/octet-stream")
+    mtime = os.path.getmtime(full)
+    last_modified = email.utils.formatdate(mtime, usegmt=True)
+
+    if ext in (".html", ".htm"):
+        headers = [
+            ("Content-Type", ctype),
+            ("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0"),
+            ("Pragma", "no-cache"),
+            ("Expires", "0"),
+        ]
+    else:
+        # Versioned asset URLs (?v=...) can be cached forever. Everything else
+        # must revalidate so a deploy is picked up without a hard refresh.
+        if "v=" in (environ.get("QUERY_STRING") or ""):
+            cache_control = "public, max-age=31536000, immutable"
+        else:
+            cache_control = "no-cache"
+        headers = [
+            ("Content-Type", ctype),
+            ("Cache-Control", cache_control),
+            ("Last-Modified", last_modified),
+        ]
+        ims = environ.get("HTTP_IF_MODIFIED_SINCE")
+        if ims and not environ.get("HTTP_IF_NONE_MATCH"):
+            try:
+                since = email.utils.parsedate_to_datetime(ims).timestamp()
+                if int(mtime) <= int(since):
+                    start_response(
+                        "304 Not Modified",
+                        [("Cache-Control", cache_control), ("Last-Modified", last_modified)],
+                    )
+                    return [b""]
+            except (TypeError, ValueError, OverflowError):
+                pass
     with open(full, "rb") as fh:
         body = fh.read()
-    start_response(
-        "200 OK",
-        [
-            ("Content-Type", ctype),
-            ("Content-Length", str(len(body))),
-        ],
-    )
+    headers.append(("Content-Length", str(len(body))))
+    start_response("200 OK", headers)
     if environ.get("REQUEST_METHOD") == "HEAD":
         return [b""]
     return [body]
