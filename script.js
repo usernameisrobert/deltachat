@@ -583,21 +583,28 @@ Keep him in character always: blindingly charming with a razor underneath — su
             };
         };
         const rules = [];
-        try {
-            for (const sheet of document.styleSheets) {
-                let list;
-                try { list = sheet.cssRules; } catch (e) { rules.push('SHEET_ERR:' + (sheet.href || 'inline')); continue; }
-                const walk = (rs, prefix) => {
-                    for (const r of rs) {
-                        if (r.cssRules) { walk(r.cssRules, prefix + (r.conditionText || r.media ? r.conditionText || r.media.mediaText : '') + ' >> '); continue; }
-                        if (r.selectorText && /\.textbox\b/.test(r.selectorText)) {
+        const sheetInfo = [];
+        for (const sheet of document.styleSheets) {
+            let list = null;
+            try { list = sheet.cssRules; } catch (e) { sheetInfo.push((sheet.href || 'inline') + ':CORS'); continue; }
+            sheetInfo.push((sheet.href || 'inline') + ':' + list.length);
+            const walk = (rs, prefix) => {
+                for (const r of rs) {
+                    if (r.selectorText) {
+                        if (/\.textbox\b/.test(r.selectorText)) {
                             rules.push(prefix + r.selectorText + ' { ' + r.style.cssText.slice(0, 160) + ' }');
                         }
+                        continue;
                     }
-                };
-                walk(list, '');
-            }
-        } catch (e) { rules.push('ERR:' + e.message); }
+                    if (r.cssRules) {
+                        let cond = '';
+                        try { cond = r.conditionText || (r.media && r.media.mediaText) || ''; } catch (e) {}
+                        walk(r.cssRules, prefix + cond + ' >> ');
+                    }
+                }
+            };
+            try { walk(list, ''); } catch (e) { rules.push('ERR:' + e.message); }
+        }
         const payload = {
             href: location.href,
             iw: window.innerWidth,
@@ -619,7 +626,7 @@ Keep him in character always: blindingly charming with a razor underneath — su
             body: pick(document.body),
             html: pick(document.documentElement),
             bodyScroll: [document.body.scrollWidth, document.body.scrollHeight],
-            sheets: [...document.styleSheets].map((s) => (s.href || 'inline') + ':' + (s.cssRules ? s.cssRules.length : 'X')),
+            sheets: sheetInfo,
             textboxRules: rules.slice(0, 25),
         };
         document.title = 'DIAG ' + JSON.stringify(payload);
