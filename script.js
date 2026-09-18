@@ -2557,9 +2557,56 @@ That is not allowed. Do NOT repeat that line or anything identical to it. Discar
         this.preloader.fadeOutMusic(duration);
         this.currentBackgroundSong = null;
     }
+
+    // Ask people to chip in on Ko-fi, but never more than once a day and only
+    // after the NSFW warning has been acknowledged so popups don't stack.
+    maybeShowDonatePopup() {
+        const seenKey = 'deltarune_donation_seen_v1';
+        const today = new Date().toISOString().slice(0, 10);
+        try {
+            if (localStorage.getItem(seenKey) === today) return;
+        } catch (e) {}
+        const overlay = document.getElementById('donate-overlay');
+        const notNow = document.getElementById('donate-not-now');
+        const support = document.getElementById('donate-support');
+        if (!overlay || !notNow || !support) return;
+        let dismissed = false;
+        const show = () => {
+            if (dismissed) return;
+            overlay.classList.remove('hidden');
+            notNow.focus();
+        };
+        const dismiss = () => {
+            dismissed = true;
+            overlay.classList.add('hidden');
+            try { localStorage.setItem(seenKey, today); } catch (e) {}
+        };
+        const ok = document.getElementById('warning-ok');
+        if (ok) {
+            ok.addEventListener('click', () => setTimeout(show, 700));
+        } else {
+            setTimeout(show, 2500);
+        }
+        notNow.addEventListener('click', dismiss);
+        support.addEventListener('click', () => {
+            dismiss();
+            const kofi = document.getElementById('kofi-button');
+            if (kofi) kofi.click();
+        });
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) dismiss();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
+                e.preventDefault();
+                dismiss();
+            }
+        });
+    }
 }
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', () => {
     window.susieDialogue = new SusieDialogue();
+    window.susieDialogue.maybeShowDonatePopup();
 });
